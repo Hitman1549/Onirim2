@@ -389,7 +389,7 @@ public class Card extends JFrame
 		if(Hand.size() < 5)
 		{
 			Hand.add(Hand.size(), Deck.remove(0));
-			System.out.print(Hand.get(Hand.size()-1) + " hi");
+			System.out.print(Hand.get(Hand.size()-1) + " ");
 		}
 
 	}
