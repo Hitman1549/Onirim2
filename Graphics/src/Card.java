@@ -21,7 +21,7 @@ public class Card extends JFrame
 	public static ArrayList<Integer> Deck = new ArrayList<Integer>();
 	public static ArrayList<Integer> Hand = new ArrayList<Integer>();
 	public static ArrayList<Integer> Stack = new ArrayList<Integer>();
-
+	public static ArrayList<Integer> Limbo = new ArrayList<Integer>();
 	
 	public static boolean repeat = false;
 	public boolean card, cardO, cardT, cardTh, cardF;
@@ -113,7 +113,7 @@ public class Card extends JFrame
 	
 	public int handSize = 0;
 	public int stackCounter = 0;
-	
+	public boolean firstDraw = true;
 	//Coorodinints 
 	public int deckX = 1;
 	public int deckY = boardHeight - (cardHeight + 40);
@@ -480,7 +480,6 @@ public class Card extends JFrame
 		g.setColor(Color.RED);
 		drawCB(g, 1, boardHeight - (cardHeight + 40));
 		
-
 		repaint();
 	}
 	public void drawCards(Graphics g)
