@@ -520,7 +520,7 @@ public class Card extends JFrame
 		}
 		for(stackCounter = 0; stackCounter < Stack.size(); stackCounter++)
 		{
-			putDownCards(Stack.get(stackCounter), g, stackPoint, (cardWidth*2)+(15*stackCounter));
+			putDownCards(Stack.get(stackCounter), g, (cardWidth*2)+(15*stackCounter), stackPoint);
 		}
 		repaint();
 	}
