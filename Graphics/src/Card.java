@@ -123,6 +123,8 @@ public class Card extends JFrame
 	public int fourthX = cardSpace*4;
 	public int fifthX = cardSpace*5;
 	
+	public int limboY = deckY - cardHeight - 10;
+	
 	public int firstY = deckY;
 	public int secondY = deckY;
 	public int thirdY = deckY;
@@ -385,11 +387,28 @@ public class Card extends JFrame
 	}
 	public void DrawCard()
 	{
-		
 		if(Hand.size() < 5)
 		{
-			Hand.add(Hand.size(), Deck.remove(0));
-			System.out.print(Hand.get(Hand.size()-1) + " ");
+			if(firstDraw == true)
+				if(Deck.get(0) > 68)
+				{
+					Limbo.add(Limbo.size(), Deck.remove(0));
+				}
+				else
+					Hand.add(Hand.size(), Deck.remove(0));
+				
+				if(firstDraw == true && Hand.size() >= 5)
+				{
+					firstDraw = false;
+					if(Limbo.size() > 0)
+						Deck.add(randy.nextInt(Deck.size()), Limbo.get(0));
+				}
+				if(firstDraw == false)
+				{
+					Hand.add(Hand.size(), Deck.remove(0));
+				}
+//			System.out.print(Hand.get(Hand.size()-1) + " ");
+			System.out.println("Deck Size =" + Deck.size() + " ");
 		}
 
 	}
@@ -521,6 +540,11 @@ public class Card extends JFrame
 		{
 			putDownCards(Stack.get(stackCounter), g, (cardWidth*2)+(15*stackCounter), stackPoint);
 		}
+		for(int i = 0; i < Limbo.size(); i++)
+		{
+			putDownCards(Limbo.get(i), g, cardWidth + (cardWidth+5)*i, limboY);
+		}
+			
 		repaint();
 	}
 
@@ -703,8 +727,8 @@ public class Card extends JFrame
 		public void isCardOnStack()
 		{
 			//Need to add a conditon to the if statements where the card will not set unless it can stack onto the card it is going on
-			System.out.println("firstX = "+firstX);
-			System.out.println("bottomLineYcoord = "+bottomLineYcoord);
+//			System.out.println("firstX = "+firstX);
+//			System.out.println("bottomLineYcoord = "+bottomLineYcoord);
 			if(firstY < bottomLineYcoord)
 			{
 				Stack.add(Hand.remove(0));
