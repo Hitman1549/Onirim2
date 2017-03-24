@@ -404,7 +404,7 @@ public class Card extends JFrame
 					firstDraw = false;
 					
 				}
-				if(firstDraw == false)
+				if(firstDraw == false && Hand.size() <= 5)
 				{
 					Hand.add(Hand.size(), Deck.remove(0));
 				}
