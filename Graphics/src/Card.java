@@ -398,10 +398,11 @@ public class Card extends JFrame
 					Hand.add(Hand.size(), Deck.remove(0));
 				
 				if(firstDraw == true && Hand.size() >= 5)
-				{
-					firstDraw = false;
+				{	
 					if(Limbo.size() > 0)
 						Deck.add(randy.nextInt(Deck.size()), Limbo.get(0));
+					firstDraw = false;
+					
 				}
 				if(firstDraw == false)
 				{
