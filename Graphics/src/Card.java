@@ -37,15 +37,15 @@ public class Card extends JFrame
 	private boolean cardfourOnStack = false;
 	private boolean cardfiveOnStack = false;
 	
-	private String TD = "TanDoor.png";
-	private String RD = "RedDoor.png";
-	private String BD = "BlueDoor.png";
-	private String GD = "GreenDoor.png";
+//	private String TD = "TanDoor.png";
+//	private String RD = "RedDoor.png";
+//	private String BD = "BlueDoor.png";
+//	private String GD = "GreenDoor.png";
 	
-//	private String TD = "CardBack.png";
-//	private String RD = "CardBack.png";
-//	private String BD = "CardBack.png";
-//	private String GD = "CardBack.png";
+	private String TD = "CardBack.png";
+	private String RD = "CardBack.png";
+	private String BD = "CardBack.png";
+	private String GD = "CardBack.png";
 	
 	private String TK = "TanKey.png";
 	private String TM = "TanMoon.png";
@@ -390,21 +390,27 @@ public class Card extends JFrame
 		if(Hand.size() < 5)
 		{
 			if(firstDraw == true)
-				if(Deck.get(0) > 68)
+				if(Deck.get(0) > 58)
 				{
 					Limbo.add(Limbo.size(), Deck.remove(0));
+					System.out.println("The Limbo is "+Limbo.size() + " Cards Big");
 				}
 				else
 					Hand.add(Hand.size(), Deck.remove(0));
 				
 				if(firstDraw == true && Hand.size() >= 5)
 				{	
-					if(Limbo.size() > 0)
-						Deck.add(randy.nextInt(Deck.size()), Limbo.get(0));
+					while(Limbo.size() != 0)
+					{
+						Deck.add(randy.nextInt(Deck.size()), Limbo.remove(0));
+					}
 					firstDraw = false;
-					
+					if(firstDraw == false)
+						System.out.println("FirstDraw = False");
+					else
+						System.out.println("Wtf just happend?");
 				}
-				if(firstDraw == false && Hand.size() <= 5)
+				if(firstDraw == false && Hand.size() < 5)
 				{
 					Hand.add(Hand.size(), Deck.remove(0));
 				}
@@ -623,6 +629,10 @@ public class Card extends JFrame
 			}
 			if(cardFourSelected == true)
 			{
+				if(58 < Hand.get(4) && Hand.get(4) < 68)
+				Hand.remove(0);
+				for(int i = 0; i < 5; i++)
+					Deck.remove(0);
 				cardFourSelected = false;
 			}
 		}
