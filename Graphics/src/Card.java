@@ -629,63 +629,104 @@ public class Card extends JFrame
 			}
 			if(cardFourSelected == true)
 			{
-				if(58 < Hand.get(4) && Hand.get(4) < 68)
-				Hand.remove(0);
-				for(int i = 0; i < 5; i++)
-					Deck.remove(0);
 				cardFourSelected = false;
 			}
 		}
 
 		public void mP()
 		{
-			cardSelected = true;
-			card = true;
-			cardO = false;
-			cardT = false;
-			cardTh = false;
-			cardF = false;
-			System.out.println("Card1 Selected");			
+			if(Hand.size() == 5)
+			{
+				if(58 < Hand.get(0) && Hand.get(0) < 68)
+				{
+					Hand.remove(0);
+					for(int i = 0; i < 5; i++)
+						Deck.remove(0);
+				}
+				cardSelected = true;
+				card = true;
+				cardO = false;
+				cardT = false;
+				cardTh = false;
+				cardF = false;
+				System.out.println("Card1 Selected");	
+		}
 		}
 		public void mP1()
 		{
-			cardOneSelected = true;
-			card = false;
-			cardO = true;
-			cardT = false;
-			cardTh = false;
-			cardF = false;
-			System.out.println("CardOne Selected");			
+			if(Hand.size() == 5)
+			{
+				if(58 < Hand.get(1) && Hand.get(1) < 68)
+				{
+					Hand.remove(1);
+					for(int i = 0; i < 5; i++)
+						Deck.remove(0);
+				}
+				cardOneSelected = true;
+				card = false;
+				cardO = true;
+				cardT = false;
+				cardTh = false;
+				cardF = false;
+				System.out.println("CardOne Selected");		
+		}
 		}
 		public void mP2()
 		{
-			cardTwoSelected = true;
-			card = false;
-			cardO = false;
-			cardT = true;
-			cardTh = false;
-			cardF = false;
-			System.out.println("CardTwo Selected");			
+			if(Hand.size() == 5)
+			{
+				if(58 < Hand.get(2) && Hand.get(2) < 68)
+				{
+					Hand.remove(2);
+					for(int i = 0; i < 5; i++)
+						Deck.remove(0);
+				}
+				cardTwoSelected = true;
+				card = false;
+				cardO = false;
+				cardT = true;
+				cardTh = false;
+				cardF = false;
+				System.out.println("CardTwo Selected");		
+		}
 		}
 		public void mP3()
 		{
-			cardThreeSelected = true;
-			card = false;
-			cardO = false;
-			cardT = false;
-			cardTh = true;
-			cardF = false;
-			System.out.println("CardThree Selected");
+			if(Hand.size() == 5)
+			{
+				if(58 < Hand.get(3) && Hand.get(3) < 68)
+				{
+					Hand.remove(3);
+					for(int i = 0; i < 5; i++)
+						Deck.remove(0);
+				}
+					cardThreeSelected = true;
+					card = false;
+					cardO = false;
+					cardT = false;
+					cardTh = true;
+					cardF = false;
+					System.out.println("CardThree Selected");
+		}
 		}
 		public void mP4()
 		{
-			cardFourSelected = true;
-			card = false;
-			cardO = false;
-			cardT = false;
-			cardTh = false;
-			cardF = true;
-			System.out.println("Cardfour Selected");
+			if(Hand.size() == 5)
+			{
+				if(58 < Hand.get(4) && Hand.get(4) < 68)
+				{
+					Hand.remove(4);
+				for(int i = 0; i < 5; i++)
+					Deck.remove(0);
+				}
+				cardFourSelected = true;
+				card = false;
+				cardO = false;
+				cardT = false;
+				cardTh = false;
+				cardF = true;
+				System.out.println("Cardfour Selected");
+			}
 		}
 
 		@Override
