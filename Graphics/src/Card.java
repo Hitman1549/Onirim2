@@ -22,6 +22,7 @@ public class Card extends JFrame
 	public static ArrayList<Integer> Hand = new ArrayList<Integer>();
 	public static ArrayList<Integer> Stack = new ArrayList<Integer>();
 	public static ArrayList<Integer> Limbo = new ArrayList<Integer>();
+	public static ArrayList<Integer> Discard = new ArrayList<Integer>();
 	
 	public static boolean repeat = false;
 	public boolean card, cardO, cardT, cardTh, cardF;
@@ -31,11 +32,6 @@ public class Card extends JFrame
 	private boolean cardThreeSelected = false;
 	private boolean cardFourSelected = false;
 	
-	private boolean cardOnStack = false;
-	private boolean cardtwoOnStack = false;
-	private boolean cardthreeOnStack = false;
-	private boolean cardfourOnStack = false;
-	private boolean cardfiveOnStack = false;
 	
 //	private String TD = "TanDoor.png";
 //	private String RD = "RedDoor.png";
@@ -776,99 +772,40 @@ public class Card extends JFrame
 			else 
 				cardFourSelected = false;
 		}
-		public void isCardOnStack()
+		public void isCardOnStack(int x, int y, int a)
 		{
 			//Need to add a conditon to the if statements where the card will not set unless it can stack onto the card it is going on
 //			System.out.println("firstX = "+firstX);
 //			System.out.println("bottomLineYcoord = "+bottomLineYcoord);
-			if(firstY < bottomLineYcoord)
+			if(y < bottomLineYcoord && x > cardWidth + 5)
 			{
-				Stack.add(Hand.remove(0));
+				Stack.add(Hand.remove(a));
 			}
-			if(secondY < bottomLineYcoord)
+		}
+		public void isCardDiscard(int x, int y, int a)
+		{
+			if(x < cardWidth + 5 && y < deckY-cardHeight && Hand.get(a) < 58)
 			{
-				Stack.add(Hand.remove(1));
+				Discard.add(Hand.remove(0));
 			}
-			if(thirdY < bottomLineYcoord)
-			{
-				Stack.add(Hand.remove(2));
-			}
-			if(fourthY < bottomLineYcoord)
-			{
-				Stack.add(Hand.remove(3));
-			}
-			if(fifthY < bottomLineYcoord)
-			{
-				Stack.add(Hand.remove(4));
-			}
+		}
+		
+		
+		public void whereIsTheCard(int x, int y, int a)
+		{
+			isCardOnStack(x, y, a);
+			isCardDiscard(x, y, a);
+			firstX = cardSpace*1;
+			firstY = deckY;	
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) 
 		{
-			isCardOnStack();
-
-			if(cardOnStack == true)
-			{
-				Stack.add(Hand.remove(0));
-				firstX = cardSpace*1;
-				firstY = deckY;	
-			}
-			else
-			{
-				firstX = cardSpace*1;
-				firstY = deckY;	
-			}
-			if(cardtwoOnStack == true)
-			{
-				Stack.add(Hand.remove(1));
-				secondX = cardSpace*2;
-				secondY = deckY;
-			}
-			else
-			{
-				secondX = cardSpace*2;
-				secondY = deckY;
-			}
-			if(cardthreeOnStack == true)
-			{
-				Stack.add(Hand.remove(2));
-				thirdX = cardSpace*3;
-				thirdY = deckY;
-			}
-			else
-			{
-				thirdX = cardSpace*3;
-				thirdY = deckY;
-			}
-			if(cardfourOnStack == true)
-			{
-				Stack.add(Hand.remove(3));
-				fourthX = cardWidth + 10*stackCounter;
-				fourthX = cardSpace*4;
-				fourthY = deckY;
-			}
-			else
-			{
-				fourthX = cardSpace*4;
-				fourthY = deckY;
-			}
-			if(cardfiveOnStack == true)
-			{
-				Stack.add(Hand.remove(4));
-				fifthX = cardWidth + 10*stackCounter;
-				fifthX = cardSpace*5;
-				fifthY = deckY;
-			}
-			else
-			{
-				fifthX = cardSpace*5;
-				fifthY = deckY;	
-			}
-			cardOnStack = false;
-			cardtwoOnStack = false;
-			cardthreeOnStack = false;
-			cardfourOnStack = false;
-			cardfiveOnStack = false;
+			whereIsTheCard(firstX, firstY, 0);
+			whereIsTheCard(secondX, secondY, 1);	
+			whereIsTheCard(thirdX, thirdY, 2);
+			whereIsTheCard(fourthX, fourthY, 3);
+			whereIsTheCard(fifthX, fifthY, 4);
 			
 			repaint();
 			
