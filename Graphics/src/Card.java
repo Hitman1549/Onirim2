@@ -23,6 +23,7 @@ public class Card extends JFrame
 	public static ArrayList<Integer> Stack = new ArrayList<Integer>();
 	public static ArrayList<Integer> Limbo = new ArrayList<Integer>();
 	public static ArrayList<Integer> Discard = new ArrayList<Integer>();
+	public static ArrayList<Integer> Doors = new ArrayList<Integer>();
 	
 	public static boolean repeat = false;
 	public boolean card, cardO, cardT, cardTh, cardF;
@@ -33,15 +34,15 @@ public class Card extends JFrame
 	private boolean cardFourSelected = false;
 	
 	
-//	private String TD = "TanDoor.png";
-//	private String RD = "RedDoor.png";
-//	private String BD = "BlueDoor.png";
-//	private String GD = "GreenDoor.png";
+	private String TD = "TanDoor.png";
+	private String RD = "RedDoor.png";
+	private String BD = "BlueDoor.png";
+	private String GD = "GreenDoor.png";
 	
-	private String TD = "CardBack.png";
-	private String RD = "CardBack.png";
-	private String BD = "CardBack.png";
-	private String GD = "CardBack.png";
+//	private String TD = "CardBack.png";
+//	private String RD = "CardBack.png";
+//	private String BD = "CardBack.png";
+//	private String GD = "CardBack.png";
 	
 	private String TK = "TanKey.png";
 	private String TM = "TanMoon.png";
@@ -379,7 +380,8 @@ public class Card extends JFrame
 		for(int i = 0; i < DeckSize; i++)
 			Deck.add(CardsN.remove(randy.nextInt(CardsN.size())));
 		Card obj = new Card();
-
+//		for(int i = 0; i <= 76; i++)
+//			System.out.print(i + ",");
 	}
 	public void DrawCard()
 	{
@@ -418,71 +420,71 @@ public class Card extends JFrame
 	public void putDownCards(int a, Graphics g, int x, int y)
 	{
 		
-		if(a <= 9)
+		if(a <= 9)// 1,2,3,4,5,6,7,8,9
 		{
 			drawTk(g, x, y);
 		}
-		else if(a <= 17)
+		else if(a <= 17)//10,11,12,13,14,15,16,17
 		{
 			drawTs(g, x, y);
 		}
-		else if(a <= 24)
+		else if(a <= 24)//18,19,20,21,22,23,24
 		{
 			drawTm(g, x, y);
 		}
-		else if(a <= 30)
+		else if(a <= 30)//25,26,27,28,29,30
 		{
 			drawBk(g, x, y);
 		}
-		else if(a <= 34)
+		else if(a <= 34)//31,32,33,34
 		{
 			drawBs(g, x, y);
 		}
-		else if(a <= 38)
+		else if(a <= 38)//35,36,37,38
 		{
 			drawBm(g, x, y);
 		}
-		else if(a <= 42)
+		else if(a <= 42)//39,40,41,42
 		{
 			drawGk(g, x, y);
 		}
-		else if(a <= 46)
+		else if(a <= 46)//43,44,45,46
 		{
 			drawGs(g, x, y);
 		}
-		else if(a <= 49)
+		else if(a <= 49)//47,48,49
 		{
 			drawGm(g, x, y);
 		}
-		else if(a <= 52)
+		else if(a <= 52)//50,51,52
 		{
 			drawRk(g, x, y);
 		}
-		else if(a <= 55)
+		else if(a <= 55)//53,54,55
 		{
 			drawRs(g, x, y);
 		}
-		else if(a <= 58)
+		else if(a <= 58)//56,57,58
 		{
 			drawRm(g, x, y);
 		}
-		else if(a <= 68)
+		else if(a <= 68)//59,60,61,62,63,64,65,66,67,68
 		{
 			drawNs(g, x, y);
 		}
-		else if(a <= 70)
+		else if(a <= 70)//69,70
 		{
 			drawTD(g, x, y);
 		}
-		else if(a <= 72)
+		else if(a <= 72)//71,72
 		{
 			drawBD(g, x, y);
 		}
-		else if(a <= 74)
+		else if(a <= 74)//73,74
 		{
 			drawGD(g, x, y);
 		}
-		else if(a <= 76)
+		else if(a <= 76)//75,76
 		{
 			drawRD(g, x, y);
 		}
@@ -503,6 +505,7 @@ public class Card extends JFrame
 		drawCB(g, 1, boardHeight - (cardHeight + 40));
 		
 		repaint();
+
 	}
 	public void drawCards(Graphics g)
 	{
@@ -772,21 +775,76 @@ public class Card extends JFrame
 			else 
 				cardFourSelected = false;
 		}
+		public void isCardCorrect(int a, int b)
+		{
+			String aC = "";
+			String bC = "";
+			int R = 0;
+			int B = 0;
+			int G = 0;
+			int T = 0;
+				 if(a <= 9){a=1;
+				 aC = ""}
+			else if(a <= 17){a=2;}
+			else if(a <= 24){a=3;}
+			else if(a <= 30){a=4;}
+			else if(a <= 34){a=5;}
+			else if(a <= 38){a=6;}
+			else if(a <= 42){a=7;}
+			else if(a <= 46){a=8;}
+			else if(a <= 49){a=9;}
+			else if(a <= 52){a=10;}
+			else if(a <= 55){a=11;}
+			else if(a <= 58){a=12;}
+			else if(a <= 68){a=13;}
+			else if(a <= 70){a=14;}
+			else if(a <= 72){a=15;}
+			else if(a <= 74){a=16;}
+			else if(a <= 76){a=17;}
+				 if(b <= 9){b=1;}
+			else if(b <= 17){b=2;}
+			else if(b <= 24){b=3;}
+			else if(b <= 30){b=4;}
+			else if(b <= 34){b=5;}
+			else if(b <= 38){b=6;}
+			else if(b <= 42){b=7;}
+			else if(b <= 46){b=8;}
+			else if(b <= 49){b=9;}
+			else if(b <= 52){b=10;}
+			else if(b <= 55){b=11;}
+			else if(b <= 58){b=12;}
+			else if(b <= 68){b=13;}
+			else if(b <= 70){b=14;}
+			else if(b <= 72){b=15;}
+			else if(b <= 74){b=16;}
+			else if(b <= 76){b=17;}
+			
+			if(a != b)
+				if()
+		}
+		public void isCardFirst(int a)
+		{
+			int b = 0;
+			if(Stack.size() != 0)
+			{
+				isCardCorrect(a, b);
+				b = Stack.get(a-1);
+			}
+			else
+				Stack.add(Hand.remove(a));
+		}
 		public void isCardOnStack(int x, int y, int a)
 		{
-			//Need to add a conditon to the if statements where the card will not set unless it can stack onto the card it is going on
-//			System.out.println("firstX = "+firstX);
-//			System.out.println("bottomLineYcoord = "+bottomLineYcoord);
 			if(y < bottomLineYcoord && x > cardWidth + 5)
 			{
-				Stack.add(Hand.remove(a));
+				isCardFirst(a);
 			}
 		}
 		public void isCardDiscard(int x, int y, int a)
 		{
 			if(x < cardWidth + 5 && y < deckY-cardHeight && Hand.get(a) < 58)
 			{
-				Discard.add(Hand.remove(0));
+				Discard.add(Hand.remove(a));
 			}
 		}
 		
@@ -795,17 +853,25 @@ public class Card extends JFrame
 		{
 			isCardOnStack(x, y, a);
 			isCardDiscard(x, y, a);
-			firstX = cardSpace*1;
-			firstY = deckY;	
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) 
 		{
 			whereIsTheCard(firstX, firstY, 0);
-			whereIsTheCard(secondX, secondY, 1);	
+			firstX = cardSpace*1;
+			firstY = deckY;	
+			whereIsTheCard(secondX, secondY, 1);
+			secondX = cardSpace*2;
+			secondY = deckY;	
 			whereIsTheCard(thirdX, thirdY, 2);
+			thirdX = cardSpace*3;
+			thirdY = deckY;	
 			whereIsTheCard(fourthX, fourthY, 3);
+			fourthX = cardSpace*4;
+			fourthY = deckY;	
 			whereIsTheCard(fifthX, fifthY, 4);
+			fifthX = cardSpace*5;
+			fifthY = deckY;	
 			
 			repaint();
 			
