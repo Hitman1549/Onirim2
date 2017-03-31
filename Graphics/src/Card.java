@@ -33,6 +33,7 @@ public class Card extends JFrame
 	private boolean cardThreeSelected = false;
 	private boolean cardFourSelected = false;
 	
+	private int number = 0;
 	
 	private String TD = "TanDoor.png";
 	private String RD = "RedDoor.png";
@@ -777,62 +778,101 @@ public class Card extends JFrame
 		}
 		public void isCardCorrect(int a, int b)
 		{
+
 			String aC = "";
 			String bC = "";
-			String A = "";
+			String Ae = "";
 			String Be = "";
-			int R = 0;
-			int B = 0;
-			int G = 0;
+			String Ce = "";
+			int O = 0;
 			int T = 0;
-				 if(a <= 9){a=1;aC="Tan";A = "Key";}
-			else if(a <= 17){a=2;aC="Tan";A = "Sun";}
-			else if(a <= 24){a=3;aC="Tan";A = "Moon";}
-			else if(a <= 30){a=4;aC="Blue";A = "Key";}
-			else if(a <= 34){a=5;aC="Blue";A = "Sun";}
-			else if(a <= 38){a=6;aC="Blue";A = "Moon";}
-			else if(a <= 42){a=7;aC="Green";A = "Key";}
-			else if(a <= 46){a=8;aC="Green";A = "Sun";}
-			else if(a <= 49){a=9;aC="Green";A = "Moon";}
-			else if(a <= 52){a=10;aC="Red";A = "Key";}
-			else if(a <= 55){a=11;aC="Red";A = "Sun";}
-			else if(a <= 58){a=12;aC="Red";A = "Moon";}
-			else if(a <= 68){a=13;aC="Nightmare";}
-			else if(a <= 70){a=14;aC="TanDoor";}
-			else if(a <= 72){a=15;aC="BlueDoor";}
-			else if(a <= 74){a=16;aC="GreenDoor";}
-			else if(a <= 76){a=17;aC="RedDoor";}
-				 if(b <= 9){b=1;bC="Tan";Be = "Key";}
-			else if(b <= 17){b=2;bC="Tan";Be = "Sun";}
-			else if(b <= 24){b=3;bC="Tan";Be = "Moon";}
-			else if(b <= 30){b=4;bC="Blue";Be = "Key";}
-			else if(b <= 34){b=5;bC="Blue";Be = "Sun";}
-			else if(b <= 38){b=6;bC="Blue";Be = "Moon";}
-			else if(b <= 42){b=7;bC="Green";Be = "Key";}
-			else if(b <= 46){b=8;bC="Green";Be = "Sun";}
-			else if(b <= 49){b=9;bC="Green";Be = "Moon";}
-			else if(b <= 52){b=10;bC="Red";Be = "Key";}
-			else if(b <= 55){b=11;bC="Red";Be = "Sun";}
-			else if(b <= 58){b=12;bC="Red";Be = "Moon";}
-			else if(b <= 68){b=13;bC="Nightmare";}
-			else if(b <= 70){b=14;bC="TanDoor";}
-			else if(b <= 72){b=15;bC="BlueDoor";}
-			else if(b <= 74){b=16;bC="GreenDoor";}
-			else if(b <= 76){b=17;bC="RedDoor";}
-			
-			if(a != b)
-				if(A != Be)
-				{
-					Stack.add(Hand.remove(0));
-				}
+				 if(a <= 9){O=1;aC="Tan";Ae = "Key";}
+			else if(a <= 17){O=2;aC="Tan";Ae = "Sun";}
+			else if(a <= 24){O=3;aC="Tan";Ae = "Moon";}
+			else if(a <= 30){O=4;aC="Blue";Ae = "Key";}
+			else if(a <= 34){O=5;aC="Blue";Ae = "Sun";}
+			else if(a <= 38){O=6;aC="Blue";Ae = "Moon";}
+			else if(a <= 42){O=7;aC="Green";Ae = "Key";}
+			else if(a <= 46){O=8;aC="Green";Ae = "Sun";}
+			else if(a <= 49){O=9;aC="Green";Ae = "Moon";}
+			else if(a <= 52){O=10;aC="Red";Ae = "Key";}
+			else if(a <= 55){O=11;aC="Red";Ae = "Sun";}
+			else if(a <= 58){O=12;aC="Red";Ae = "Moon";}
+			else if(a <= 68){O=13;aC="Nightmare";}
+			else if(a <= 70){O=14;aC="TanDoor";}
+			else if(a <= 72){O=15;aC="BlueDoor";}
+			else if(a <= 74){O=16;aC="GreenDoor";}
+			else if(a <= 76){O=17;aC="RedDoor";}
+				 if(b <= 9){T=1;bC="Tan";Be = "Key";}
+			else if(b <= 17){T=2;bC="Tan";Be = "Sun";}
+			else if(b <= 24){T=3;bC="Tan";Be = "Moon";}
+			else if(b <= 30){T=4;bC="Blue";Be = "Key";}
+			else if(b <= 34){T=5;bC="Blue";Be = "Sun";}
+			else if(b <= 38){T=6;bC="Blue";Be = "Moon";}
+			else if(b <= 42){T=7;bC="Green";Be = "Key";}
+			else if(b <= 46){T=8;bC="Green";Be = "Sun";}
+			else if(b <= 49){T=9;bC="Green";Be = "Moon";}
+			else if(b <= 52){T=10;bC="Red";Be = "Key";}
+			else if(b <= 55){T=11;bC="Red";Be = "Sun";}
+			else if(b <= 58){T=12;bC="Red";Be = "Moon";}
+			else if(b <= 68){T=13;bC="Nightmare";}
+			else if(b <= 70){T=14;bC="TanDoor";}
+			else if(b <= 72){T=15;bC="BlueDoor";}
+			else if(b <= 74){T=16;bC="GreenDoor";}
+			else if(b <= 76){T=17;bC="RedDoor";}
+				 int c = 0;
+				 if(Stack.size() >= 3)
+					 c = Stack.get(Stack.size() - 2);
+				String cC = "";
+				
+				 if(c <= 9){cC="Tan";Ce = "Key";}
+			else if(c <= 17){cC="Tan";Ce = "Sun";}
+			else if(c <= 24){cC="Tan";Ce = "Moon";}
+			else if(c <= 30){cC="Blue";Ce = "Key";}
+			else if(c <= 34){cC="Blue";Ce = "Sun";}
+			else if(c <= 38){cC="Blue";Ce = "Moon";}
+			else if(c <= 42){cC="Green";Ce = "Key";}
+			else if(c <= 46){cC="Green";Ce = "Sun";}
+			else if(c <= 49){cC="Green";Ce = "Moon";}
+			else if(c <= 52){cC="Red";Ce = "Key";}
+			else if(c <= 55){cC="Red";Ce = "Sun";}
+			else if(c <= 58){cC="Red";Ce = "Moon";}
+			else if(c <= 68){cC="Nightmare";}
+			else if(c <= 70){cC="TanDoor";}
+			else if(c <= 72){cC="BlueDoor";}
+			else if(c <= 74){cC="GreenDoor";}
+			else if(c <= 76){cC="RedDoor";}
+			if(Ae != Be)
+			{
+				Stack.add(Hand.remove(number));
+				Doors(aC, bC, cC);
+			}
+		}
+		public void Doors(String aC, String bC, String cC)
+		{
+			if(aC == "Tan" && bC == "Tan" && cC == "Tan")
+			{
+				System.out.print("TAN DOOOOOOOOR");
+			}
+			if(aC == "Blue" && bC == "Blue" && cC == "Blue")
+			{
+				System.out.print("BLUE DOOOOOOOOR");
+			}
+			if(aC == "Green" && bC == "Green" && cC == "Green")
+			{
+				System.out.print("GREEN DOOOOOOOOR");
+			}
+			if(aC == "Red" && bC == "Red" && cC == "Red")
+			{
+				System.out.print("RED DOOOOOOOOR");
+			}
 		}
 		public void isCardFirst(int a)
 		{
-			int b = 0;
-			if(Stack.size() != 0)
+			if(Stack.size() > 0)
 			{
+				int b = Stack.get(Stack.size()-1);
 				isCardCorrect(a, b);
-				b = Stack.get(a-1);
 			}
 			else
 				Stack.add(Hand.remove(a));
@@ -861,18 +901,23 @@ public class Card extends JFrame
 		@Override
 		public void mouseReleased(MouseEvent e) 
 		{
+			number = 0;
 			whereIsTheCard(firstX, firstY, 0);
 			firstX = cardSpace*1;
 			firstY = deckY;	
+			number = 1;
 			whereIsTheCard(secondX, secondY, 1);
 			secondX = cardSpace*2;
 			secondY = deckY;	
+			number = 2;
 			whereIsTheCard(thirdX, thirdY, 2);
 			thirdX = cardSpace*3;
 			thirdY = deckY;	
+			number = 3;
 			whereIsTheCard(fourthX, fourthY, 3);
 			fourthX = cardSpace*4;
 			fourthY = deckY;	
+			number = 4;
 			whereIsTheCard(fifthX, fifthY, 4);
 			fifthX = cardSpace*5;
 			fifthY = deckY;	
