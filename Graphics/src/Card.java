@@ -850,6 +850,9 @@ public class Card extends JFrame
 		}
 		public void Doors(String aC, String bC, String cC)
 		{
+			System.out.print(aC);
+			System.out.print(bC);
+			System.out.print(cC);
 			if(aC == "Tan" && bC == "Tan" && cC == "Tan")
 			{
 				System.out.print("TAN DOOOOOOOOR");
@@ -869,19 +872,18 @@ public class Card extends JFrame
 		}
 		public void isCardFirst(int a)
 		{
-			if(Stack.size() > 0)
+			if(Stack.size() == 0)
 			{
-				int b = Stack.get(Stack.size()-1);
-				isCardCorrect(a, b);
-			}
-			else
 				Stack.add(Hand.remove(a));
+			}
 		}
 		public void isCardOnStack(int x, int y, int a)
 		{
 			if(y < bottomLineYcoord && x > cardWidth + 5)
 			{
 				isCardFirst(a);
+				int b = Stack.get(Stack.size()-1);
+				isCardCorrect(a, b);
 			}
 		}
 		public void isCardDiscard(int x, int y, int a)
