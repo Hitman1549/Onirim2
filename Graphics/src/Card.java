@@ -778,7 +778,7 @@ public class Card extends JFrame
 		}
 		public void isCardCorrect(int a, int b)
 		{
-
+			System.out.print("is card correct");
 			String aC = "";
 			String bC = "";
 			String Ae = "";
@@ -842,7 +842,7 @@ public class Card extends JFrame
 			else if(c <= 72){cC="BlueDoor";}
 			else if(c <= 74){cC="GreenDoor";}
 			else if(c <= 76){cC="RedDoor";}
-			if(Ae != Be)
+			if(O != T)
 			{
 				Stack.add(Hand.remove(number));
 				Doors(aC, bC, cC);
@@ -872,18 +872,74 @@ public class Card extends JFrame
 		}
 		public void isCardFirst(int a)
 		{
+			
 			if(Stack.size() == 0)
 			{
 				Stack.add(Hand.remove(a));
 			}
 		}
+		public void isCardSecond(int a, int b)
+		{
+			if(Stack.size() == 0)
+			{
+				String aC = "";
+				String bC = "";
+				String Ae = "";
+				String Be = "";
+				int O = 0;
+				int T = 0;
+				if(a <= 9){O=1;aC="Tan";Ae = "Key";}
+				else if(a <= 17){O=2;aC="Tan";Ae = "Sun";}
+				else if(a <= 24){O=3;aC="Tan";Ae = "Moon";}
+				else if(a <= 30){O=4;aC="Blue";Ae = "Key";}
+				else if(a <= 34){O=5;aC="Blue";Ae = "Sun";}
+				else if(a <= 38){O=6;aC="Blue";Ae = "Moon";}
+				else if(a <= 42){O=7;aC="Green";Ae = "Key";}
+				else if(a <= 46){O=8;aC="Green";Ae = "Sun";}
+				else if(a <= 49){O=9;aC="Green";Ae = "Moon";}
+				else if(a <= 52){O=10;aC="Red";Ae = "Key";}
+				else if(a <= 55){O=11;aC="Red";Ae = "Sun";}
+				else if(a <= 58){O=12;aC="Red";Ae = "Moon";}
+				else if(a <= 68){O=13;aC="Nightmare";}
+				else if(a <= 70){O=14;aC="TanDoor";}
+				else if(a <= 72){O=15;aC="BlueDoor";}
+				else if(a <= 74){O=16;aC="GreenDoor";}
+				else if(a <= 76){O=17;aC="RedDoor";}
+					 if(b <= 9){T=1;bC="Tan";Be = "Key";}
+				else if(b <= 17){T=2;bC="Tan";Be = "Sun";}
+				else if(b <= 24){T=3;bC="Tan";Be = "Moon";}
+				else if(b <= 30){T=4;bC="Blue";Be = "Key";}
+				else if(b <= 34){T=5;bC="Blue";Be = "Sun";}
+				else if(b <= 38){T=6;bC="Blue";Be = "Moon";}
+				else if(b <= 42){T=7;bC="Green";Be = "Key";}
+				else if(b <= 46){T=8;bC="Green";Be = "Sun";}
+				else if(b <= 49){T=9;bC="Green";Be = "Moon";}
+				else if(b <= 52){T=10;bC="Red";Be = "Key";}
+				else if(b <= 55){T=11;bC="Red";Be = "Sun";}
+				else if(b <= 58){T=12;bC="Red";Be = "Moon";}
+				else if(b <= 68){T=13;bC="Nightmare";}
+				else if(b <= 70){T=14;bC="TanDoor";}
+				else if(b <= 72){T=15;bC="BlueDoor";}
+				else if(b <= 74){T=16;bC="GreenDoor";}
+				else if(b <= 76){T=17;bC="RedDoor";}
+					 if(Ae != Be)
+					 {
+						 
+					 }
+			}
+		}
 		public void isCardOnStack(int x, int y, int a)
 		{
+			//if the y value of the card is above the hand and to the right of the discard pile
 			if(y < bottomLineYcoord && x > cardWidth + 5)
 			{
 				isCardFirst(a);
-				int b = Stack.get(Stack.size()-1);
-				isCardCorrect(a, b);
+				if(Stack.size() > 1 && Stack.size() < 3)
+				{
+					int b = Stack.get(Stack.size()-1);
+					isCardSecond(a, b);
+					isCardCorrect(a, b);
+				}
 			}
 		}
 		public void isCardDiscard(int x, int y, int a)
@@ -896,9 +952,9 @@ public class Card extends JFrame
 		
 		
 		public void whereIsTheCard(int x, int y, int a)
-		{
-			isCardOnStack(x, y, a);
+		{	
 			isCardDiscard(x, y, a);
+			isCardOnStack(x, y, a);
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) 
