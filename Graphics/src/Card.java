@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 public class Card extends JFrame
 {
-	
+	public static int HandCard = 0;
 	public static int DeckSize = 76;
 	public static ArrayList<Integer> CardsN = new ArrayList<Integer>();
 	public static ArrayList<Integer> Deck = new ArrayList<Integer>();
@@ -23,8 +23,8 @@ public class Card extends JFrame
 	public static ArrayList<Integer> Stack = new ArrayList<Integer>();
 	public static ArrayList<Integer> Limbo = new ArrayList<Integer>();
 	public static ArrayList<Integer> Discard = new ArrayList<Integer>();
-	public static ArrayList<Integer> Doors = new ArrayList<Integer>();
-	
+	public static ArrayList<String> Doors = new ArrayList<String>();
+	public static ArrayList<String> Inception = new ArrayList<String>();
 	public static boolean repeat = false;
 	public boolean card, cardO, cardT, cardTh, cardF;
 	private boolean cardSelected = false;
@@ -32,71 +32,53 @@ public class Card extends JFrame
 	private boolean cardTwoSelected = false;
 	private boolean cardThreeSelected = false;
 	private boolean cardFourSelected = false;
-	
 	private int number = 0;
-	
-//	private String TD = "TanDoor.png";
-//	private String RD = "RedDoor.png";
-//	private String BD = "BlueDoor.png";
-//	private String GD = "GreenDoor.png";
-	
-	private String TD = "CardBack.png";
-	private String RD = "CardBack.png";
-	private String BD = "CardBack.png";
-	private String GD = "CardBack.png";
-	
+	private String TD = "TanDoor.png";
+	private String RD = "RedDoor.png";
+	private String BD = "BlueDoor.png";
+	private String GD = "GreenDoor.png";
+//	private String TD = "CardBack.png";
+//	private String RD = "CardBack.png";
+//	private String BD = "CardBack.png";
+//	private String GD = "CardBack.png";
 	private String TK = "TanKey.png";
 	private String TM = "TanMoon.png";
 	private String TS = "TanSun.png";
-	
 	private String RK = "RedKey.png";
 	private String RM = "RedMoon.png";
 	private String RS = "RedSun.png";
-	
 	private String BK = "BlueKey.png";
 	private String BM = "BlueMoon.png";
 	private String BS = "BlueSun.png";
-	
 	private String GK = "GreenKey.png";
 	private String GM = "GreenMoon.png";
 	private String GS = "GreenSun.png";
-	
 	private String NS = "NightmearS.png";
-	
 	private String CB = "CardBack.png";
-	
 	private String FA = "";
 	private String FB = "";
 	private String SA = "";
 	private String SB = "";
 	private String TA = "";
 	private String TB = "";
-	
 	private BufferedImage ImageTD;
 	private BufferedImage ImageRD;
 	private BufferedImage ImageBD;
 	private BufferedImage ImageGD;
-	
 	private BufferedImage ImageTK;
 	private BufferedImage ImageTM;
 	private BufferedImage ImageTS;
-	
 	private BufferedImage ImageBK;
 	private BufferedImage ImageBM;
 	private BufferedImage ImageBS;
-	
 	private BufferedImage ImageGK;
 	private BufferedImage ImageGM;
 	private BufferedImage ImageGS;
-	
 	private BufferedImage ImageRK;
 	private BufferedImage ImageRM;
 	private BufferedImage ImageRS;
-	
 	private BufferedImage ImageCB;
-	
 	private BufferedImage ImageNS;
-	
 	private int boardWidth = 1500;
 	private int boardHeight = 800;
 	private int cardWidth = 50, cardHeight = 100;
@@ -105,16 +87,13 @@ public class Card extends JFrame
 	public int RY = 0;
 	public int AXpoint = RX + cardWidth/2;
 	public int AYpoint = RY + cardHeight/2;
-	
 	public int stackPoint = cardHeight + 12;
 	public int CBX = 1;
 	public int CBY =  boardHeight - (cardHeight + 40);	
 	public static Random randy = new Random();
-
 	public String CardNow = "";		
 	public int handHeight = boardHeight - (cardHeight + 50);
 	public int cardSpace = cardWidth + 5;
-	
 	public int handSize = 0;
 	public int stackCounter = 0;
 	public boolean firstDraw = true;
@@ -126,15 +105,13 @@ public class Card extends JFrame
 	public int thirdX = cardSpace*3;
 	public int fourthX = cardSpace*4;
 	public int fifthX = cardSpace*5;
-	
 	public int limboY = deckY - cardHeight - 10;
-	
+	public boolean HALT = false;
 	public int firstY = deckY;
 	public int secondY = deckY;
 	public int thirdY = deckY;
 	public int fourthY = deckY;
 	public int fifthY = deckY;
-	
 	public int bottomLineYcoord = boardHeight - (cardHeight + 50);
 	
 	public Card()
@@ -782,185 +759,169 @@ public class Card extends JFrame
 			else 
 				cardFourSelected = false;
 		}
-		public void isCardCorrect(int a, int b, int c)
+		public int SimpleNumber(int a)
 		{
-			int O = 0;
-			int T = 0;
-				 if(a <= 9){O=1;FA="Tan";FB = "Key";}
-			else if(a <= 17){O=2;FA="Tan";FB = "Sun";}
-			else if(a <= 24){O=3;FA="Tan";FB = "Moon";}
-			else if(a <= 30){O=4;FA="Blue";FB = "Key";}
-			else if(a <= 34){O=5;FA="Blue";FB = "Sun";}
-			else if(a <= 38){O=6;FA="Blue";FB = "Moon";}
-			else if(a <= 42){O=7;FA="Green";FB = "Key";}
-			else if(a <= 46){O=8;FA="Green";FB = "Sun";}
-			else if(a <= 49){O=9;FA="Green";FB = "Moon";}
-			else if(a <= 52){O=10;FA="Red";FB = "Key";}
-			else if(a <= 55){O=11;FA="Red";FB = "Sun";}
-			else if(a <= 58){O=12;FA="Red";FB = "Moon";}
-			else if(a <= 68){O=13;FA="Nightmare";}
-			else if(a <= 70){O=14;FA="TanDoor";}
-			else if(a <= 72){O=15;FA="BlueDoor";}
-			else if(a <= 74){O=16;FA="GreenDoor";}
-			else if(a <= 76){O=17;FA="RedDoor";}
-				 
-				 if(b <= 9){T=1;SA="Tan";SB = "Key";}
-			else if(b <= 17){T=2;SA="Tan";SB = "Sun";}
-			else if(b <= 24){T=3;SA="Tan";SB = "Moon";}
-			else if(b <= 30){T=4;SA="Blue";SB = "Key";}
-			else if(b <= 34){T=5;SA="Blue";SB = "Sun";}
-			else if(b <= 38){T=6;SA="Blue";SB = "Moon";}
-			else if(b <= 42){T=7;SA="Green";SB = "Key";}
-			else if(b <= 46){T=8;SA="Green";SB = "Sun";}
-			else if(b <= 49){T=9;SA="Green";SB = "Moon";}
-			else if(b <= 52){T=10;SA="Red";SB = "Key";}
-			else if(b <= 55){T=11;SA="Red";SB = "Sun";}
-			else if(b <= 58){T=12;SA="Red";SB = "Moon";}
-			else if(b <= 68){T=13;SA="Nightmare";}
-			else if(b <= 70){T=14;SA="TanDoor";}
-			else if(b <= 72){T=15;SA="BlueDoor";}
-			else if(b <= 74){T=16;SA="GreenDoor";}
-			else if(b <= 76){T=17;SA="RedDoor";}
-
-				
-				 if(c <= 9){TA="Tan";TB = "Key";}
-			else if(c <= 17){TA="Tan";TB = "Sun";}
-			else if(c <= 24){TA="Tan";TB = "Moon";}
-			else if(c <= 30){TA="Blue";TB = "Key";}
-			else if(c <= 34){TA="Blue";TB = "Sun";}
-			else if(c <= 38){TA="Blue";TB = "Moon";}
-			else if(c <= 42){TA="Green";TB = "Key";}
-			else if(c <= 46){TA="Green";TB = "Sun";}
-			else if(c <= 49){TA="Green";TB = "Moon";}
-			else if(c <= 52){TA="Red";TB = "Key";}
-			else if(c <= 55){TA="Red";TB = "Sun";}
-			else if(c <= 58){TA="Red";TB = "Moon";}
-			else if(c <= 68){TA="Nightmare";}
-			else if(c <= 70){TA="TanDoor";}
-			else if(c <= 72){TA="BlueDoor";}
-			else if(c <= 74){TA="GreenDoor";}
-			else if(c <= 76){TA="RedDoor";}
-			if(FA != SA)
-			{
-				Stack.add(Hand.remove(number));
-				Doors(FA, SA, TA);
-			}
+				 if(a <= 9){return 1;}
+			else if(a <= 17){return 2;}
+			else if(a <= 24){return 3;}
+			else if(a <= 30){return 4;}
+			else if(a <= 34){return 5;}
+			else if(a <= 38){return 6;}
+			else if(a <= 42){return 7;}
+			else if(a <= 46){return 8;}
+			else if(a <= 49){return 9;}
+			else if(a <= 52){return 10;}
+			else if(a <= 55){return 11;}
+			else if(a <= 58){return 12;}
+			else if(a <= 68){return 13;}
+			else if(a <= 70){return 14;}
+			else if(a <= 72){return 15;}
+			else if(a <= 74){return 16;}
+			else if(a <= 76){return 17;}
+				return 0;
 		}
-		public void Doors(String F, String S, String T)
+		public String CardColor(int b)
 		{
-			if(F == S && S == T)
-			{
-				if(F == "Tan")
-				{
-					Doors.add(1);
-				}
-				if(F == "Blue")
-				{
-					Doors.add(2);
-				}
-				if(F == "Green")
-				{
-					Doors.add(3);
-				}
-				if(F == "Red")
-				{
-					Doors.add(4);
-				}
-				for(int i = 0; i < Doors.size(); i++)
-				{
-					System.out.print(Doors.get(i));
-				}
-			}
+			String fa = "";
+			 if(b <= 9){fa="Tan";}
+		else if(b <= 17){fa="Tan";}
+		else if(b <= 24){fa="Tan";}
+		else if(b <= 30){fa="Blue";}
+		else if(b <= 34){fa="Blue";}
+		else if(b <= 38){fa="Blue";}
+		else if(b <= 42){fa="Green";}
+		else if(b <= 46){fa="Green";}
+		else if(b <= 49){fa="Green";}
+		else if(b <= 52){fa="Red";}
+		else if(b <= 55){fa="Red";}
+		else if(b <= 58){fa="Red";}
+		else if(b <= 68){fa="Nightmare";}
+		else if(b <= 70){fa="TanDoor";}
+		else if(b <= 72){fa="BlueDoor";}
+		else if(b <= 74){fa="GreenDoor";}
+		else if(b <= 76){fa="RedDoor";}
+			 return fa;
+		}
+		public String CardType(int c)
+		{
+			 if(c <= 1){return "Key";}
+		else if(c <= 2){return "Sun";}
+		else if(c <= 3){return "Moon";}
+		else if(c <= 4){return "Key";}
+		else if(c <= 5){return "Sun";}
+		else if(c <= 6){return "Moon";} 
+		else if(c <= 7){return "Key";}
+		else if(c <= 8){return "Sun";}
+		else if(c <= 9){return "Moon";}
+		else if(c <= 10){return "Key";}
+		else if(c <= 11){return "Sun";}
+		else if(c <= 12){return "Moon";}
+			 return null;
+		}
+		public void secondCard(int handCardone, int handCardTwo)
+		{
+				int O = 0;
+				int T = 0;
+				O = SimpleNumber(handCardone);
+				T = SimpleNumber(handCardTwo);
+				FB = CardType(O);
+				SB = CardType(T);
+				System.out.println("FB = " + FB + "SB = " + SB);
+					 if(FB != SB)
+					 {
+						 Stack.add(Hand.remove(handCardone));
+						 System.out.println("Ditto");
+					 }
+		}
+		public void isCardCorrect(int b, int c)
+		{
+			int topCard = 0;
+			int nextCard = 0;
+				topCard = SimpleNumber(HandCard);
+				nextCard = SimpleNumber(b);
+				System.out.println("topCard = " + topCard + "nextCard = " + nextCard);
+				FA = CardColor(HandCard);
+				SA = CardColor(b);
+				FB = CardType(HandCard);
+				SB = CardType(b);
+				
+				secondCard(HandCard, Stack.get(Stack.size()-1));
 		}
 		
 		public void isCardSecond(int handCardone, int handCardTwo)
 		{
 				int O = 0;
 				int T = 0;
-					 if(handCardone <= 9){O=1;FB = "Key";}
-				else if(handCardone <= 17){O=2;FB = "Sun";}
-				else if(handCardone <= 24){O=3;FB = "Moon";}
-				else if(handCardone <= 30){O=4;FB = "Key";} 
-				else if(handCardone <= 34){O=5;FB = "Sun";}
-				else if(handCardone <= 38){O=6;FB = "Moon";}
-				else if(handCardone <= 42){O=7;FB = "Key";}
-				else if(handCardone <= 46){O=8;FB = "Sun";}
-				else if(handCardone <= 49){O=9;FB = "Moon";}
-				else if(handCardone <= 52){O=10;FB = "Key";}
-				else if(handCardone <= 55){O=11;FB = "Sun";}
-				else if(handCardone <= 58){O=12;FB = "Moon";}
-					 if(handCardTwo <= 9){T=1;SB = "Key";}
-				else if(handCardTwo <= 17){T=2;SB = "Sun";}
-				else if(handCardTwo <= 24){T=3;SB = "Moon";}
-				else if(handCardTwo <= 30){T=4;SB = "Key";}
-				else if(handCardTwo <= 34){T=5;SB = "Sun";}
-				else if(handCardTwo <= 38){T=6;SB = "Moon";}
-				else if(handCardTwo <= 42){T=7;SB = "Key";}
-				else if(handCardTwo <= 46){T=8;SB = "Sun";}
-				else if(handCardTwo <= 49){T=9;SB = "Moon";}
-				else if(handCardTwo <= 52){T=10;SB = "Key";}
-				else if(handCardTwo <= 55){T=11;SB = "Sun";}
-				else if(handCardTwo <= 58){T=12;SB = "Moon";}
+				System.out.println("handCardone = "+handCardone);
+				O = SimpleNumber(handCardone);
+				System.out.println("handCardTwo = "+handCardTwo);
+				T = SimpleNumber(handCardTwo);
+				FB = CardType(O);
+				SB = CardType(T);
+				System.out.println(" FB = " + FB + "SB = " + SB);
 					 if(FB != SB)
 					 {
 						 Stack.add(Hand.remove(handCardone));
+						 System.out.println("Ditto");
 					 }
 		}
-		public void isCardOnStack(int x, int y, int HandCard)
+		public void isCardOnStack(int x, int y)
 		{
 			//if the y value of the card is above the hand and to the right of the discard pile
 			if(y < bottomLineYcoord && x > cardWidth + 5)
 			{
 				if(Stack.size() == 0)
 				{
+					System.out.print(Stack.size() + "<- Should be 0");
 					Stack.add(Hand.remove(HandCard));
 				}
 				else if(Stack.size() == 1 )
 				{
-					int b = Stack.get(Stack.size()-1);
-					isCardSecond(HandCard, b);
+					System.out.print(Stack.size() + "<- Should be 1");
+					isCardSecond(HandCard, Stack.get(Stack.size()-1));
 				}
-				else if(Stack.size() > 1 && Stack.size() < 3)
+				else if(Stack.size() <= 2)
 				{
-					isCardCorrect(HandCard, Stack.get(Stack.size()-1), Stack.get(Stack.size() - 2));
+					System.out.print(Stack.size() + "<- Should be greater then or equal to 2");
+					isCardCorrect(Stack.get(Stack.size()-1), Stack.get(Stack.size() - 2));
 				}
 			}
 		}
-		public void isCardDiscard(int x, int y, int a)
+		public void isCardDiscard(int x, int y)
 		{
-			if(x < cardWidth + 5 && y < deckY-cardHeight && Hand.get(a) < 58)
+			if(x < cardWidth + 5 && y < deckY-cardHeight && Hand.get(HandCard) < 58)
 			{
-				Discard.add(Hand.remove(a));
+				Discard.add(Hand.remove(HandCard));
 			}
 		}
 		
 		
-		public void whereIsTheCard(int x, int y, int HandCard)
+		public void whereIsTheCard(int x, int y)
 		{	
-			isCardDiscard(x, y, HandCard);
-			isCardOnStack(x, y, HandCard);
+			isCardDiscard(x, y);
+			isCardOnStack(x, y);
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) 
 		{
-			number = 0;
-			whereIsTheCard(firstX, firstY, 0);
+			HandCard = 0;
+			whereIsTheCard(firstX, firstY);
 			firstX = cardSpace*1;
 			firstY = deckY;	
-			number = 1;
-			whereIsTheCard(secondX, secondY, 1);
+			HandCard = 1;
+			whereIsTheCard(secondX, secondY);
 			secondX = cardSpace*2;
 			secondY = deckY;	
-			number = 2;
-			whereIsTheCard(thirdX, thirdY, 2);
+			HandCard = 2;
+			whereIsTheCard(thirdX, thirdY);
 			thirdX = cardSpace*3;
 			thirdY = deckY;	
-			number = 3;
-			whereIsTheCard(fourthX, fourthY, 3);
+			HandCard = 3;
+			whereIsTheCard(fourthX, fourthY);
 			fourthX = cardSpace*4;
 			fourthY = deckY;	
-			number = 4;
-			whereIsTheCard(fifthX, fifthY, 4);
+			HandCard = 4;
+			whereIsTheCard(fifthX, fifthY);
 			fifthX = cardSpace*5;
 			fifthY = deckY;	
 			
