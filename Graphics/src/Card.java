@@ -487,7 +487,8 @@ public class Card extends JFrame
 		g.drawLine(0, boardHeight - (cardHeight + 50), boardWidth, bottomLineYcoord);
 		g.setColor(Color.RED);
 		drawCB(g, 1, boardHeight - (cardHeight + 40));
-		
+		g.setColor(Color.orange);
+		g.fillRect(0, 0, cardWidth + 5, deckY - 10);
 		repaint();
 
 	}
@@ -832,7 +833,7 @@ public class Card extends JFrame
 						 Stack.add(Hand.remove(handCardone));
 						 System.out.println("Ditto");
 					 }
-		}
+		} 
 		public void isCardCorrect(int b, int c)
 		{
 			int topCard = 0;
@@ -889,7 +890,7 @@ public class Card extends JFrame
 		}
 		public void isCardDiscard(int x, int y)
 		{
-			if(x < cardWidth + 5 && y < deckY-cardHeight && Hand.get(HandCard) < 58)
+			if(x < cardWidth + 5 && y < deckY-10 && Hand.get(HandCard) < 58)
 			{
 				Discard.add(Hand.remove(HandCard));
 			}
