@@ -762,107 +762,83 @@ public class Card extends JFrame
 		}
 		public int SimpleNumber(int a)
 		{
-				 if(a <= 9){return 1;}
-			else if(a <= 17){return 2;}
-			else if(a <= 24){return 3;}
-			else if(a <= 30){return 4;}
-			else if(a <= 34){return 5;}
-			else if(a <= 38){return 6;}
-			else if(a <= 42){return 7;}
-			else if(a <= 46){return 8;}
-			else if(a <= 49){return 9;}
-			else if(a <= 52){return 10;}
-			else if(a <= 55){return 11;}
-			else if(a <= 58){return 12;}
-			else if(a <= 68){return 13;}
-			else if(a <= 70){return 14;}
-			else if(a <= 72){return 15;}
-			else if(a <= 74){return 16;}
-			else if(a <= 76){return 17;}
+				 if(a <= 9){return 1;}//Tan
+			else if(a <= 17){return 2;}//Tan
+			else if(a <= 24){return 3;}//Tan
+			else if(a <= 30){return 4;}//Blue
+			else if(a <= 34){return 5;}//Blue
+			else if(a <= 38){return 6;}//Blue
+			else if(a <= 42){return 7;}//Green
+			else if(a <= 46){return 8;}//Green
+			else if(a <= 49){return 9;}//Green
+			else if(a <= 52){return 10;}//Red
+			else if(a <= 55){return 11;}//Red
+			else if(a <= 58){return 12;}//Red
+			else if(a <= 68){return 13;}//
+			else if(a <= 70){return 14;}//
+			else if(a <= 72){return 15;}//
+			else if(a <= 74){return 16;}//
+			else if(a <= 76){return 17;}//
 				return 0;
 		}
 		public String CardColor(int b)
 		{
-			String fa = "";
-			 if(b <= 9){fa="Tan";}
-		else if(b <= 17){fa="Tan";}
-		else if(b <= 24){fa="Tan";}
-		else if(b <= 30){fa="Blue";}
-		else if(b <= 34){fa="Blue";}
-		else if(b <= 38){fa="Blue";}
-		else if(b <= 42){fa="Green";}
-		else if(b <= 46){fa="Green";}
-		else if(b <= 49){fa="Green";}
-		else if(b <= 52){fa="Red";}
-		else if(b <= 55){fa="Red";}
-		else if(b <= 58){fa="Red";}
-		else if(b <= 68){fa="Nightmare";}
-		else if(b <= 70){fa="TanDoor";}
-		else if(b <= 72){fa="BlueDoor";}
-		else if(b <= 74){fa="GreenDoor";}
-		else if(b <= 76){fa="RedDoor";}
-			 return fa;
+			 if(b == 1 || b == 2 || b == 3){return "Tan";}
+		else if(b == 4 || b == 5 || b == 6){return "Blue";}
+		else if(b == 7 || b == 8 || b == 9){return "Green";}
+		else if(b == 10 || b == 11 || b == 12){return "Red";}
+			 return null;
 		}
 		public String CardType(int c)
 		{
-			 if(c <= 1){return "Key";}
-		else if(c <= 2){return "Sun";}
-		else if(c <= 3){return "Moon";}
-		else if(c <= 4){return "Key";}
-		else if(c <= 5){return "Sun";}
-		else if(c <= 6){return "Moon";} 
-		else if(c <= 7){return "Key";}
-		else if(c <= 8){return "Sun";}
-		else if(c <= 9){return "Moon";}
-		else if(c <= 10){return "Key";}
-		else if(c <= 11){return "Sun";}
-		else if(c <= 12){return "Moon";}
+			 if(c == 1 || c == 4 || c == 7 || c == 10){return "Key";}
+		else if(c == 2 || c == 5 || c == 8 || c == 11){return "Sun";}
+		else if(c == 3 || c == 6 || c == 9 || c == 12){return "Moon";}
 			 return null;
 		}
-		public void secondCard(int handCardone, int handCardTwo)
+		public void isCardCorrect()
 		{
-				int O = 0;
-				int T = 0;
-				O = SimpleNumber(handCardone);
-				T = SimpleNumber(handCardTwo);
-				FB = CardType(O);
-				SB = CardType(T);
+				int newCard = 0;	newCard = SimpleNumber(HandCard);
+				int topCard = 0;	topCard = SimpleNumber(Stack.get(Stack.size()-1));
+				int finalCard = 0;	finalCard = SimpleNumber(Stack.get(Stack.size()-2));
+				
+				System.out.println("newCard = " + newCard + "topCard = " + topCard);
+				
+					FA = CardColor(newCard);
+				System.out.println("newCard = " + newCard);
+				System.out.println("FA = " + FA);
+					FB = CardType(newCard);
+				System.out.println("FB = " + FB);
+				
+					SA = CardColor(topCard);
+				System.out.println("topCard = " + topCard);
+				System.out.println("SA = " + SA);
+					SB = CardType(topCard);
+				System.out.println("SB = " + SB);
+				
 				System.out.println("FB = " + FB + "SB = " + SB);
 					 if(FB != SB)
 					 {
-						 Stack.add(Hand.remove(handCardone));
-						 System.out.println("Ditto");
+						 Stack.add(Hand.remove(HandCard));
 					 }
-		} 
-		public void isCardCorrect(int b, int c)
-		{
-			int topCard = 0;
-			int nextCard = 0;
-				topCard = SimpleNumber(HandCard);
-				nextCard = SimpleNumber(b);
-				System.out.println("topCard = " + topCard + "nextCard = " + nextCard);
-				FA = CardColor(HandCard);
-				SA = CardColor(b);
-				FB = CardType(HandCard);
-				SB = CardType(b);
-				
-				secondCard(HandCard, Stack.get(Stack.size()-1));
 		}
 		
-		public void isCardSecond(int handCardone, int handCardTwo)
+		public void isCardSecond()
 		{
 				int O = 0;
 				int T = 0;
-				System.out.println("handCardone = "+handCardone);
-				O = SimpleNumber(handCardone);
-				System.out.println("handCardTwo = "+handCardTwo);
-				T = SimpleNumber(handCardTwo);
+				// The K number for the card being placed
+				O = SimpleNumber(HandCard);
+				System.out.println("HandCard = " + HandCard + "O = "+ O);
+				// The K number for the card that is first on the stack
+				T = SimpleNumber(Stack.get(Stack.size()-1));
+				System.out.println("Stack.get(Stack.size()-1" + "T = " + T);
 				FB = CardType(O);
 				SB = CardType(T);
 				System.out.println(" FB = " + FB + "SB = " + SB);
 					 if(FB != SB)
 					 {
-						 Stack.add(Hand.remove(handCardone));
+						 Stack.add(Hand.remove(HandCard));
 						 System.out.println("Ditto");
 					 }
 		}
@@ -879,12 +855,13 @@ public class Card extends JFrame
 				else if(Stack.size() == 1 )
 				{
 					System.out.print(Stack.size() + "<- Should be 1");
-					isCardSecond(HandCard, Stack.get(Stack.size()-1));
+					isCardSecond();
 				}
-				else if(Stack.size() <= 2)
+				else if(Stack.size() >= 2)
 				{
 					System.out.print(Stack.size() + "<- Should be greater then or equal to 2");
-					isCardCorrect(Stack.get(Stack.size()-1), Stack.get(Stack.size() - 2));
+					isCardCorrect();
+					
 				}
 			}
 		}
