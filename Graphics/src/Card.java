@@ -21,10 +21,12 @@ public class Card extends JFrame
 	public static ArrayList<Integer> Deck = new ArrayList<Integer>();
 	public static ArrayList<Integer> Hand = new ArrayList<Integer>();
 	public static ArrayList<Integer> Stack = new ArrayList<Integer>();
+	public static ArrayList<Integer> doubleStack = new ArrayList<Integer>();
 	public static ArrayList<Integer> Limbo = new ArrayList<Integer>();
 	public static ArrayList<Integer> Discard = new ArrayList<Integer>();
-	public static ArrayList<String> Doors = new ArrayList<String>();
+	public static ArrayList<Integer> Doors = new ArrayList<Integer>();
 	public static ArrayList<String> Inception = new ArrayList<String>();
+	
 	public static boolean repeat = false;
 	public boolean card, cardO, cardT, cardTh, cardF;
 	private boolean cardSelected = false;
@@ -535,6 +537,10 @@ public class Card extends JFrame
 		{
 			putDownCards(Limbo.get(i), g, cardWidth + (cardWidth+5)*i, limboY);
 		}
+		for(int doors = 0; doors < Doors.size(); doors++)
+		{
+			putDownCards(Doors.get(doors), g, cardWidth + (cardWidth+1)*doors, cardHeight+5);
+		}
 			
 		repaint();
 	}
@@ -551,7 +557,6 @@ public class Card extends JFrame
 
 	private class Mousey implements MouseListener, MouseMotionListener
 	{
-		
 		
 		@Override
 		public void mouseDragged(MouseEvent arg0) 
@@ -798,9 +803,8 @@ public class Card extends JFrame
 		}
 		public void isCardCorrect()
 		{
-				int newCard = 0;	newCard = SimpleNumber(HandCard);
-				int topCard = 0;	topCard = SimpleNumber(Stack.get(Stack.size()-1));
-				int finalCard = 0;	finalCard = SimpleNumber(Stack.get(Stack.size()-2));
+				int newCard = 0;	newCard = SimpleNumber(Hand.get(HandCard)); System.out.println("HandCard = " + Hand.get(HandCard));
+				int topCard = 0;	topCard = SimpleNumber(Stack.get(Stack.size()-1)); System.out.println("Stack.get(Stack.size()-1) = " + Stack.get(Stack.size()-1));
 				
 				System.out.println("newCard = " + newCard + "topCard = " + topCard);
 				
@@ -820,26 +824,39 @@ public class Card extends JFrame
 					 if(FB != SB)
 					 {
 						 Stack.add(Hand.remove(HandCard));
+						 doubleStack.add(Hand.remove(HandCard));
 					 }
+				
 		}
-		
+		public void doors()
+		{
+			int topCard = 0;	
+			int secondCard = 0;	 
+			int thirdCard = 0;	
+			for(int i = 0; i < doubleStack.size(); i++)
+			{
+				topCard = SimpleNumber(doubleStack.get(doubleStack.size() - 1 - i)); 
+				secondCard = SimpleNumber(doubleStack.get(doubleStack.size() - 2 - i));
+				thirdCard = SimpleNumber(doubleStack.get(doubleStack.size() - 3 - i));
+			}
+		}
 		public void isCardSecond()
 		{
 				int O = 0;
 				int T = 0;
 				// The K number for the card being placed
-				O = SimpleNumber(HandCard);
-				System.out.println("HandCard = " + HandCard + "O = "+ O);
+				O = SimpleNumber(Hand.get(HandCard));
+				System.out.println("HandCard = " + HandCard + " and O = "+ O);
 				// The K number for the card that is first on the stack
 				T = SimpleNumber(Stack.get(Stack.size()-1));
-				System.out.println("Stack.get(Stack.size()-1" + "T = " + T);
+				System.out.println("Stack.get(Stack.size()-1) = " + Stack.get(Stack.size()-1) + " and T = " + T);
 				FB = CardType(O);
 				SB = CardType(T);
 				System.out.println(" FB = " + FB + "SB = " + SB);
 					 if(FB != SB)
 					 {
 						 Stack.add(Hand.remove(HandCard));
-						 System.out.println("Ditto");
+						 doubleStack.add(Hand.remove(HandCard));
 					 }
 		}
 		public void isCardOnStack(int x, int y)
@@ -849,17 +866,18 @@ public class Card extends JFrame
 			{
 				if(Stack.size() == 0)
 				{
-					System.out.print(Stack.size() + "<- Should be 0");
+					System.out.println(Stack.size() + "<- Should be 0");
 					Stack.add(Hand.remove(HandCard));
+					doubleStack.add(Hand.remove(HandCard));
 				}
 				else if(Stack.size() == 1 )
 				{
-					System.out.print(Stack.size() + "<- Should be 1");
+					System.out.println(Stack.size() + "<- Should be 1");
 					isCardSecond();
 				}
 				else if(Stack.size() >= 2)
 				{
-					System.out.print(Stack.size() + "<- Should be greater then or equal to 2");
+					System.out.println(Stack.size() + "<- Should be greater then or equal to 2");
 					isCardCorrect();
 					
 				}
