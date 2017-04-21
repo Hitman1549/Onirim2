@@ -25,7 +25,6 @@ public class Card extends JFrame
 	public static ArrayList<Integer> Limbo = new ArrayList<Integer>();
 	public static ArrayList<Integer> Discard = new ArrayList<Integer>();
 	public static ArrayList<Integer> Doors = new ArrayList<Integer>();
-	public int doorPile = 0; 
 	public static ArrayList<Integer> Inception = new ArrayList<Integer>();
 	
 	public static boolean repeat = false;
@@ -380,7 +379,6 @@ public class Card extends JFrame
 	}
 	public void DrawCard()
 	{
-		doorPile = 0;
 		if(Hand.size() < 5)
 		{
 			if(firstDraw == true)
@@ -406,13 +404,7 @@ public class Card extends JFrame
 				}
 				if(firstDraw == false && Hand.size() < 5)
 				{
-					int nC = Deck.remove(0);
-					if(68 < nC)
-					{
-						doorPile = nC;
-					}
-					else
-					Hand.add(Hand.size(), nC);
+					Hand.add(Hand.size(), Deck.remove(0));
 				}
 //			System.out.print(Hand.get(Hand.size()-1) + " ");
 			System.out.println("Deck Size =" + Deck.size() + " ");
@@ -546,6 +538,7 @@ public class Card extends JFrame
 		{
 			putDownCards(Stack.get(stackCounter), g, (cardWidth*2)+(15*stackCounter), stackPoint);
 		}
+		
 		for(int i = 0; i < Limbo.size(); i++)
 		{
 			putDownCards(Limbo.get(i), g, cardWidth + (cardWidth+5)*i, limboY);
@@ -555,25 +548,6 @@ public class Card extends JFrame
 			putDownCards(Doors.get(doors), g, cardWidth + (cardWidth+1)*doors, 5);
 		}
 
-		if(68 <= doorPile && doorPile <= 70 )
-		{
-			putDownCards(70, g, cardSpace*6, deckY);
-		}
-		else
-		if(doorPile <= 70 && doorPile <= 72)
-		{
-			putDownCards(72, g, cardSpace*6, deckY);
-		}
-		else
-		if(doorPile <= 72 && doorPile <= 74)
-		{
-			putDownCards(74, g, cardSpace*6, deckY);
-		}
-		else
-		if(doorPile <= 74 && doorPile <= 76)
-		{
-			putDownCards(76, g, cardSpace*6, deckY);
-		}
 		while(incept == true)
 			for(int inc = 0; inc < 5; inc++)
 			{
@@ -719,10 +693,9 @@ public class Card extends JFrame
 		@Override
 		public void mouseClicked(MouseEvent e) 
 		{
-
+			
 			if(cardSelected == true)
 			{
-				
 				cardSelected = false;
 			}
 			if(cardOneSelected == true)
@@ -742,18 +715,6 @@ public class Card extends JFrame
 			{
 				cardFourSelected = false;
 			}
-		}
-		public void key(int a)
-		{
-			int n = 0;
-			int d = 0;
-			n = SimpleNumber(Hand.get(a));
-			d = SimpleNumber(doorPile);
-			if(CardType(n) == "Key")
-				if(CardColor(n) == CardColor(d))
-				{
-					Doors.add(doorPile);
-				}
 		}
 		public void mP()
 		{
@@ -872,10 +833,15 @@ public class Card extends JFrame
 				cardThreeSelected = false;
 			if(e.getX() >= fifthX && e.getX() <= fifthX+cardWidth && e.getY() >= fifthY && e.getY() <= fifthY+cardHeight)
 			{
-				mP4();
+				mP4(); 
 			}
 			else 
 				cardFourSelected = false;
+			if(e.getX() >= (cardWidth*2)+(15*stackCounter) && e.getX() <= fifthX+cardWidth && e.getY() >= stackPoint && e.getY() <= fifthY)
+			{
+				Hand.add(Stack.remove(0));
+			}
+			
 		}
 		public int SimpleNumber(int a)
 		{
@@ -1062,57 +1028,57 @@ public class Card extends JFrame
 		{	
 			if(cardFourSelected == true)
 			{
-				if(fifthX < firstX + cardWidth/2)
+				if(fifthX < firstX + cardWidth/2 && fifthY >= deckY)
 				{Hand.add(0, Hand.remove(4));}
-				else if(fifthX < secondX + cardWidth/2)
+				else if(fifthX < secondX + cardWidth/2 && fifthY >= deckY)
 				{Hand.add(1, Hand.remove(4));}
-				else if(fifthX < thirdX + cardWidth/2)
+				else if(fifthX < thirdX + cardWidth/2 && fifthY >= deckY)
 				{Hand.add(2, Hand.remove(4));}
-				else if(fifthX < fourthX + cardWidth/2)
+				else if(fifthX < fourthX + cardWidth/2 && fifthY >= deckY)
 				{Hand.add(3, Hand.remove(4));}
 			}
 			if(cardThreeSelected == true)
 			{	
-				if(fourthX < firstX + cardWidth/2)
+				if(fourthX < firstX + cardWidth/2 && fifthY >= deckY)
 				{Hand.add(0, Hand.remove(3));}
-				else if(fourthX < secondX + cardWidth/2)
+				else if(fourthX < secondX + cardWidth/2 && fifthY >= deckY)
 				{Hand.add(1, Hand.remove(3));}		
-				else if(fourthX < thirdX + cardWidth/2)
+				else if(fourthX < thirdX + cardWidth/2 && fifthY >= deckY)
 				{Hand.add(2, Hand.remove(3));}
-				else if(fourthX > fifthX - cardWidth/2)
+				else if(fourthX > fifthX - cardWidth/2 && fifthY >= deckY)
 				{Hand.add(4, Hand.remove(3));}
 			}
 			if(cardTwoSelected == true)
 			{
-				if(thirdX < firstX + cardWidth/2)
+				if(thirdX < firstX + cardWidth/2 && fifthY >= deckY)
 				{Hand.add(0, Hand.remove(2));}
-				else if(thirdX < secondX + cardWidth/2)
+				else if(thirdX < secondX + cardWidth/2 && fifthY >= deckY)
 				{Hand.add(1, Hand.remove(2));}
-				else if(thirdX > fifthX - cardWidth/2)
+				else if(thirdX > fifthX - cardWidth/2 && fifthY >= deckY)
 				{Hand.add(4, Hand.remove(2));}
-				else if(thirdX > fourthX - cardWidth/2)
+				else if(thirdX > fourthX - cardWidth/2 && fifthY >= deckY)
 				{Hand.add(3, Hand.remove(2));}
 			}
 			if(cardOneSelected == true)
 			{
-				if(secondX < firstX + cardWidth/2)
+				if(secondX < firstX + cardWidth/2 && fifthY >= deckY)
 				{Hand.add(0, Hand.remove(1));}
-				else if(secondX > fifthX - cardWidth/2)
+				else if(secondX > fifthX - cardWidth/2 && fifthY >= deckY)
 				{Hand.add(4, Hand.remove(1));}
-				else if(secondX > fourthX - cardWidth/2)
+				else if(secondX > fourthX - cardWidth/2 && fifthY >= deckY)
 				{Hand.add(3, Hand.remove(1));}
-				else if(secondX > thirdX - cardWidth/2)
+				else if(secondX > thirdX - cardWidth/2 && fifthY >= deckY)
 				{Hand.add(2, Hand.remove(1));}
 			}
 			if(cardSelected == true)
 			{
-				if(firstX > fifthX - cardWidth/2)
+				if(firstX > fifthX - cardWidth/2 && fifthY >= deckY)
 				{Hand.add(4, Hand.remove(0));}
-				else if(firstX > fourthX - cardWidth/2)
+				else if(firstX > fourthX - cardWidth/2 && fifthY >= deckY)
 				{Hand.add(3, Hand.remove(0));}
-				else if(firstX > thirdX - cardWidth/2)
+				else if(firstX > thirdX - cardWidth/2 && fifthY >= deckY)
 				{Hand.add(2, Hand.remove(0));}
-				else if(firstX > secondX - cardWidth/2)
+				else if(firstX > secondX - cardWidth/2 && fifthY >= deckY)
 				{Hand.add(1, Hand.remove(0));}
 			}
 		}
@@ -1145,8 +1111,6 @@ public class Card extends JFrame
 			whereIsTheCard(fifthX, fifthY);
 			fifthX = cardSpace*5;
 			fifthY = deckY;	
-			if(Hand.size() == 5)
-				key(Hand.get(HandCard));
 			
 			repaint();
 			
