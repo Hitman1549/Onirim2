@@ -42,6 +42,7 @@ public class Card extends JFrame
 	public boolean BlueDoor = false;
 	public boolean GreenDoor = false;
 	public boolean RedDoor = false;
+	public boolean Win = false;
 	private String TD = "TanDoor.png";
 	private String RD = "RedDoor.png";
 	private String BD = "BlueDoor.png";
@@ -374,6 +375,19 @@ public class Card extends JFrame
 		getContentPane().add(pan);
 		setResizable(true);
 		setVisible(true);
+		if(Win == true)
+		{
+			setTitle("Win");
+			setBounds(0, 10, boardWidth, boardHeight);
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			MyPanel lan = new MyPanel();
+			pan.setBackground(Color.BLACK);
+			addMouseListener(new Mousey());
+			addMouseMotionListener(new Mousey());
+			getContentPane().add(lan);
+			setResizable(true);
+			setVisible(true);
+		}
 	}
 	
 
@@ -395,7 +409,7 @@ public class Card extends JFrame
 		if(Prophacy.size() > 0 && Prophacy.size() < 5 && Hand.size() < 5)
 		{
 			Hand.add(Prophacy.remove(0));
-			if(58 < Hand.get(Hand.size() - 1) && Hand.get(Hand.size() - 1) < 68)
+			if(58 < Hand.get(Hand.size() - 1) && Hand.get(Hand.size() - 1) <= 68)
 			{
 				Nightmare = true;
 				System.out.println("Nightmare is in play");
@@ -426,31 +440,34 @@ public class Card extends JFrame
 				if(firstDraw == false && Hand.size() < 5)
 				{
 					Hand.add(Hand.size(), Deck.remove(0));				
-					if(58 < Hand.get(4) && Hand.get(4) < 68)
-					{
-						Nightmare = true;
-						System.out.println("Nightmare is in play");
-					}
-					if(68 < Hand.get(4) && Hand.get(4) <= 70)
-					{
-						TanDoor = true;System.out.println("Tan Door");
-					}
-					if(70 < Hand.get(4) && Hand.get(4) <= 72)
-					{
-						BlueDoor = true;System.out.println("Blue Door");
-					}
-					if(72 < Hand.get(4) && Hand.get(4) <= 74)
-					{
-						GreenDoor = true;System.out.println("Green Door");
-					}
-					if(74 < Hand.get(4) && Hand.get(4) <= 76)
-					{
-						RedDoor = true;System.out.println("Red Door");
-					}
+
 				}
 
 		}
-
+		if(Hand.size() > 4)
+		{
+			if(58 < Hand.get(4) && Hand.get(4) < 68)
+			{
+				Nightmare = true;
+				System.out.println("Nightmare is in play");
+			}
+			if(68 < Hand.get(4) && Hand.get(4) <= 70)
+			{
+				TanDoor = true;System.out.println("Tan Door");
+			}
+			if(70 < Hand.get(4) && Hand.get(4) <= 72)
+			{
+				BlueDoor = true;System.out.println("Blue Door");
+			}
+			if(72 < Hand.get(4) && Hand.get(4) <= 74)
+			{
+				GreenDoor = true;System.out.println("Green Door");
+			}
+			if(74 < Hand.get(4) && Hand.get(4) <= 76)
+			{
+				RedDoor = true;System.out.println("Red Door");
+			}
+		}
 	}
 	public void putDownCards(int a, Graphics g, int x, int y)
 	{
@@ -534,8 +551,12 @@ public class Card extends JFrame
 		g.drawLine(0, boardHeight - (cardHeight + 50), boardWidth, bottomLineYcoord);
 		g.setColor(Color.RED);
 		drawCB(g, 1, boardHeight - (cardHeight + 40));
-		g.setColor(Color.orange);
-		g.fillRect(0, 0, cardWidth + 5, deckY - 10);
+
+		if(Win == true)
+		{
+			g.setColor(Color.GRAY);
+			g.drawRect(0, 0, boardWidth, boardHeight);
+		}
 		repaint();
 
 	}
@@ -612,7 +633,14 @@ public class Card extends JFrame
 		{
 			putDownCards(Doors.get(doors), g, cardWidth + (cardWidth+1)*doors, 5);
 		}
-
+		if(Discard.size() > 30)
+		{
+			Discard.remove(Discard.size()-1);
+		}
+		for(int i = 0; i < Discard.size(); i++)
+		{
+			putDownCards(Discard.get(i), g, 2, boardHeight - cardHeight*2 - 50 -10*i);
+		}
 			
 		repaint();
 	}
@@ -869,21 +897,25 @@ public class Card extends JFrame
 			if(TanDoor == true && Hand.get(HandCard) > 0 && Hand.get(HandCard) <= 9)
 			{
 				Doors.add(Hand.remove(4));
+				Discard.add(Hand.remove(HandCard));
 				TanDoor = false;
 			}
 			if(BlueDoor == true && Hand.get(HandCard) > 24 && Hand.get(HandCard) <= 30)
 			{
 				Doors.add(Hand.remove(4));
+				Discard.add(Hand.remove(HandCard));
 				BlueDoor = false;
 			}
 			if(GreenDoor == true && Hand.get(HandCard) > 38 && Hand.get(HandCard) <= 42)
 			{
 				Doors.add(Hand.remove(4));
+				Discard.add(Hand.remove(HandCard));
 				GreenDoor = false;
 			}
 			if(RedDoor == true && Hand.get(HandCard) > 49 && Hand.get(HandCard) <= 52)
 			{
 				Doors.add(Hand.remove(4));
+				Discard.add(Hand.remove(HandCard));
 				RedDoor = false;
 			}
 		}
@@ -902,10 +934,6 @@ public class Card extends JFrame
 		public void mouseClicked(MouseEvent e) 
 		{
 			System.out.println("MouseClicked");
-			
-			System.out.println("Checkpoint 1");
-
-				System.out.println("Checkpoint 2");
 				
 				if(e.getX() >= firstX && e.getX() <= firstX+cardWidth && e.getY() >= firstY && e.getY() <= firstY+cardHeight)
 				{
@@ -941,9 +969,17 @@ public class Card extends JFrame
 								{
 									Deck.add(Prophacy.remove(0));
 								}
-							
+								
 							for(int i = 0; i < 5; i++)
+							{
+								if(Deck.get(0) > 68 && Deck.get(0) <= 76)
+								{
+									Deck.add(randy.nextInt(Deck.size() - 1), Deck.remove(0));
+									i--;
+								}
+								else
 								Discard.add(Deck.remove(0));
+							}
 							Nightmare = false;
 						}
 					}
@@ -952,7 +988,8 @@ public class Card extends JFrame
 
 		public void Unused()
 		{
-			Deck.add(randy.nextInt(Deck.size()), Hand.remove(4));
+			if(Hand.size() > 4)
+				Deck.add(randy.nextInt(Deck.size() - 1), Hand.remove(4));
 			DoorsOrNO = false;
 			TanDoor = false;
 			GreenDoor = false;
@@ -962,22 +999,6 @@ public class Card extends JFrame
 
 		public void mP()
 		{
-			if(TanDoor == true)
-			{
-				Unused();
-			}
-			if(BlueDoor == true)
-			{
-				Unused();
-			}
-			if(GreenDoor == true)
-			{
-				Unused();
-			}
-			if(RedDoor == true)
-			{
-				Unused();
-			}
 			if(Hand.size() == 5)
 			{
 				cardSelected = true;
@@ -990,22 +1011,7 @@ public class Card extends JFrame
 		}
 		public void mP1()
 		{
-			if(TanDoor == true)
-			{
-				Unused();
-			}
-			if(BlueDoor == true)
-			{
-				Unused();
-			}
-			if(GreenDoor == true)
-			{
-				Unused();
-			}
-			if(RedDoor == true)
-			{
-				Unused();
-			}
+
 			if(Hand.size() == 5)
 			{
 				cardOneSelected = true;
@@ -1018,22 +1024,7 @@ public class Card extends JFrame
 		}
 		public void mP2()
 		{
-			if(TanDoor == true)
-			{
-				Unused();
-			}
-			if(BlueDoor == true)
-			{
-				Unused();
-			}
-			if(GreenDoor == true)
-			{
-				Unused();
-			}
-			if(RedDoor == true)
-			{
-				Unused();
-			}
+
 			if(Hand.size() == 5)
 			{
 				cardTwoSelected = true;
@@ -1046,22 +1037,7 @@ public class Card extends JFrame
 		}
 		public void mP3()
 		{
-			if(TanDoor == true)
-			{
-				Unused();
-			}
-			if(BlueDoor == true)
-			{
-				Unused();
-			}
-			if(GreenDoor == true)
-			{
-				Unused();
-			}
-			if(RedDoor == true)
-			{
-				Unused();
-			}
+
 			if(Hand.size() == 5)
 			{
 					cardThreeSelected = true;
@@ -1074,22 +1050,7 @@ public class Card extends JFrame
 		}
 		public void mP4()
 		{
-			if(TanDoor == true)
-			{
-				Unused();
-			}
-			if(BlueDoor == true)
-			{
-				Unused();
-			}
-			if(GreenDoor == true)
-			{
-				Unused();
-			}
-			if(RedDoor == true)
-			{
-				Unused();
-			}
+
 			{
 				cardFourSelected = true;
 				card = false;
@@ -1116,6 +1077,7 @@ public class Card extends JFrame
 			System.out.println("mousePressed");
 			if(e.getX() >= CBX && e.getX() <= CBX+cardWidth && e.getY() >= CBY && e.getY() <= CBY+cardHeight)
 			{
+				Unused();
 				DrawCard();
 			}
 			if(e.getX() >= firstX && e.getX() <= firstX+cardWidth && e.getY() >= firstY && e.getY() <= firstY+cardHeight)
@@ -1301,23 +1263,51 @@ public class Card extends JFrame
 				{
 					if(tC == "Tan" && tan < 2)
 					{
-						Doors.add(70);
+						if(Deck.contains(69))
+							Doors.add(Deck.remove(69));
+						else if(Deck.contains(70))
+							Doors.add(Deck.remove(70));
+						else if(Prophacy.contains(69))
+							Doors.add(Prophacy.remove(69));
+						else if(Prophacy.contains(70))
+							Doors.add(Prophacy.remove(70));
 					}
 					else if(tC == "Blue" && blue < 2)
 					{
-						Doors.add(72);
+						if(Deck.contains(71))
+							Doors.add(Deck.remove(71));
+						else if(Deck.contains(72))
+							Doors.add(Deck.remove(72));
+						else if(Prophacy.contains(71))
+							Doors.add(Prophacy.remove(71));
+						else if(Prophacy.contains(72))
+							Doors.add(Prophacy.remove(72));
 					}
 					else if(tC == "Green" && green < 2)
 					{
-						Doors.add(74);
+						if(Deck.contains(73))
+							Doors.add(Deck.remove(73));
+						else if(Deck.contains(74))
+							Doors.add(Deck.remove(74));
+						else if(Prophacy.contains(73))
+							Doors.add(Prophacy.remove(73));
+						else if(Prophacy.contains(74))
+							Doors.add(Prophacy.remove(74));
 					}
 					else if(tC == "Red" && red < 2)
 					{
-						Doors.add(76);
+						if(Deck.contains(75))
+							Doors.add(Deck.remove(75));
+						else if(Deck.contains(76))
+							Doors.add(Deck.remove(76));
+						else if(Prophacy.contains(75))
+							Doors.add(Prophacy.remove(75));
+						else if(Prophacy.contains(76))
+							Doors.add(Prophacy.remove(76));
 					}
 					else if(red == 2 && tan == 2 && green == 2 && blue == 2)
 					{
-						System.out.println("YOU WIN YOU WIN DKJFLKSDJVBOIGEJWSOIUPVJN EIUWOSHNFCIUOJESHJOVICESJHOIVJESIOKLJVKLSDJKLVJSDKLJVDSKLJVLKDSJVLKDSJVLKDSJVLKDSVJLKDSJVLKDSJVL:DSKJVLK:DSJVKDL:SJVDSKL:VJDSL:K");
+						Win = true;
 					}
 					doubleStack.remove(0);doubleStack.remove(0);doubleStack.remove(0);
 				}
@@ -1362,7 +1352,7 @@ public class Card extends JFrame
 		}
 		public void isCardDiscard(int x, int y)
 		{
-			if(x < cardWidth + 5 && y < deckY-10 && Hand.get(HandCard) < 58) //TODO
+			if(x < cardWidth && y < deckY && Hand.get(HandCard) < 68) //TODO
 			{
 				if((Hand.get(HandCard) > 0 && Hand.get(HandCard) <= 9) || (Hand.get(HandCard) > 24 && Hand.get(HandCard) <= 30) || (Hand.get(HandCard) > 38 && Hand.get(HandCard) <= 42) || (Hand.get(HandCard) > 49 && Hand.get(HandCard) <= 52))
 				{
