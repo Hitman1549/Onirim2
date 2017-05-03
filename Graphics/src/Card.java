@@ -1440,58 +1440,63 @@ public class Card extends JFrame
 		{	
 			if(cardFourSelected == true)
 			{
-				if(fifthX < firstX + cardWidth/2 && fifthY >= deckY)
-				{Hand.add(0, Hand.remove(4));}
-				else if(fifthX < secondX + cardWidth/2 && fifthY >= deckY)
-				{Hand.add(1, Hand.remove(4));}
-				else if(fifthX < thirdX + cardWidth/2 && fifthY >= deckY)
-				{Hand.add(2, Hand.remove(4));}
-				else if(fifthX < fourthX + cardWidth/2 && fifthY >= deckY)
-				{Hand.add(3, Hand.remove(4));}
+				int a  = 4;
+				if(fifthX < firstX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
+				{Hand.add(0, Hand.remove(a));}
+				else if(fifthX < secondX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
+				{Hand.add(1, Hand.remove(a));}
+				else if(fifthX < thirdX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
+				{Hand.add(2, Hand.remove(a));}
+				else if(fifthX < fourthX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
+				{Hand.add(3, Hand.remove(a));}
 			}
 			if(cardThreeSelected == true)
 			{	
-				if(fourthX < firstX + cardWidth/2 && fifthY >= deckY)
-				{Hand.add(0, Hand.remove(3));}
-				else if(fourthX < secondX + cardWidth/2 && fifthY >= deckY)
-				{Hand.add(1, Hand.remove(3));}		
-				else if(fourthX < thirdX + cardWidth/2 && fifthY >= deckY)
-				{Hand.add(2, Hand.remove(3));}
-				else if(fourthX > fifthX - cardWidth/2 && fifthY >= deckY)
-				{Hand.add(4, Hand.remove(3));}
+				int a = 3;
+				if(fourthX < firstX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
+				{Hand.add(0, Hand.remove(a));}
+				else if(fourthX < secondX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
+				{Hand.add(1, Hand.remove(a));}		
+				else if(fourthX < thirdX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
+				{Hand.add(2, Hand.remove(a));}
+				else if(fourthX > fifthX - cardWidth/2 && fifthY >= deckY && Hand.size() > a)
+				{Hand.add(4, Hand.remove(a));}
 			}
 			if(cardTwoSelected == true)
 			{
-				if(thirdX < firstX + cardWidth/2 && thirdY >= deckY)
-				{Hand.add(0, Hand.remove(2));}
-				else if(thirdX < secondX + cardWidth/2 && thirdY >= deckY)
-				{Hand.add(1, Hand.remove(2));}
-				else if(thirdX > fifthX - cardWidth/2 && thirdY >= deckY)
-				{Hand.add(4, Hand.remove(2));}
-				else if(thirdX > fourthX - cardWidth/2 && thirdY >= deckY)
-				{Hand.add(3, Hand.remove(2));}
+				int a = 2;
+				if(thirdX < firstX + cardWidth/2 && thirdY >= deckY && Hand.size() > a)
+				{Hand.add(0, Hand.remove(a));}
+				else if(thirdX < secondX + cardWidth/2 && thirdY >= deckY && Hand.size() > a)
+				{Hand.add(1, Hand.remove(a));}
+				else if(thirdX > fifthX - cardWidth/2 && thirdY >= deckY && Hand.size() > a)
+				{Hand.add(4, Hand.remove(a));}
+				else if(thirdX > fourthX - cardWidth/2 && thirdY >= deckY && Hand.size() > a)
+				{Hand.add(3, Hand.remove(a));}
 			}
 			if(cardOneSelected == true)
 			{
-				if(secondX < firstX + cardWidth/2 && secondY >= deckY)
-				{Hand.add(0, Hand.remove(1));}
-				else if(secondX > fifthX - cardWidth/2 && secondY >= deckY)
-				{Hand.add(4, Hand.remove(1));}
-				else if(secondX > fourthX - cardWidth/2 && secondY >= deckY)
-				{Hand.add(3, Hand.remove(1));}
-				else if(secondX > thirdX - cardWidth/2 && secondY >= deckY)
-				{Hand.add(2, Hand.remove(1));}
+				int a = 1;
+				if(secondX < firstX + cardWidth/2 && secondY >= deckY && Hand.size() > a)
+				{Hand.add(0, Hand.remove(a));}
+				else if(secondX > fifthX - cardWidth/2 && secondY >= deckY && Hand.size() > a)
+				{Hand.add(4, Hand.remove(a));}
+				else if(secondX > fourthX - cardWidth/2 && secondY >= deckY && Hand.size() > a)
+				{Hand.add(3, Hand.remove(a));}
+				else if(secondX > thirdX - cardWidth/2 && secondY >= deckY && Hand.size() > a)
+				{Hand.add(2, Hand.remove(a));}
 			}
 			if(cardSelected == true)
 			{
-				if(firstX > fifthX - cardWidth/2 && firstY >= deckY)
-				{Hand.add(4, Hand.remove(0));}
-				else if(firstX > fourthX - cardWidth/2 && firstY >= deckY)
-				{Hand.add(3, Hand.remove(0));}
-				else if(firstX > thirdX - cardWidth/2 && firstY >= deckY)
-				{Hand.add(2, Hand.remove(0));}
-				else if(firstX > secondX - cardWidth/2 && firstY >= deckY)
-				{Hand.add(1, Hand.remove(0));}
+				int a = 0;
+				if(firstX > fifthX - cardWidth/2 && firstY >= deckY && Hand.size() > a)
+				{Hand.add(4, Hand.remove(a));}
+				else if(firstX > fourthX - cardWidth/2 && firstY >= deckY && Hand.size() > a)
+				{Hand.add(3, Hand.remove(a));}
+				else if(firstX > thirdX - cardWidth/2 && firstY >= deckY && Hand.size() > a)
+				{Hand.add(2, Hand.remove(a));}
+				else if(firstX > secondX - cardWidth/2 && firstY >= deckY && Hand.size() > a)
+				{Hand.add(1, Hand.remove(a));}
 			}
 		}
 		public void ProphitsWords()
