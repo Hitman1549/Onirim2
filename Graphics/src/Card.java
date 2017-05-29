@@ -271,6 +271,7 @@ public class Card extends JFrame
 			catch(Exception e){System.out.println(e + "Damn it GD");
 		}
 	}
+
 	public void drawTk(Graphics g, int X, int Y)
 	{
 		g.drawImage(ImageTK, X, Y, cardWidth, cardHeight, null);
@@ -469,75 +470,231 @@ public class Card extends JFrame
 			}
 		}
 	}
-	public void putDownCards(int a, Graphics g, int x, int y)
+	public String getColor(int a)//TODO Added All of this in order to stay organized
 	{
 		if(a <= 9)// 1,2,3,4,5,6,7,8,9
 		{
-			drawTk(g, x, y);
+			return "tan";
 		}
 		else if(a <= 17)//10,11,12,13,14,15,16,17
 		{
-			drawTs(g, x, y);
-		}
+			return "tan";		}
 		else if(a <= 24)//18,19,20,21,22,23,24
 		{
-			drawTm(g, x, y);
-		}
+			return "tan";		}
 		else if(a <= 30)//25,26,27,28,29,30
 		{
-			drawBk(g, x, y);
+			return "blue";		
 		}
 		else if(a <= 34)//31,32,33,34
 		{
-			drawBs(g, x, y);
+			return "blue";	
 		}
 		else if(a <= 38)//35,36,37,38
 		{
-			drawBm(g, x, y);
+			return "blue";	
 		}
 		else if(a <= 42)//39,40,41,42
 		{
-			drawGk(g, x, y);
+			return "green";
 		}
 		else if(a <= 46)//43,44,45,46
 		{
-			drawGs(g, x, y);
+			return "green";
 		}
 		else if(a <= 49)//47,48,49
 		{
-			drawGm(g, x, y);
+			return "green";
 		}
 		else if(a <= 52)//50,51,52
 		{
-			drawRk(g, x, y);
+			return "red";
 		}
 		else if(a <= 55)//53,54,55
 		{
-			drawRs(g, x, y);
+			return "red";
 		}
 		else if(a <= 58)//56,57,58
 		{
-			drawRm(g, x, y);
+			return "red";
 		}
 		else if(a <= 68)//59,60,61,62,63,64,65,66,67,68
 		{
-			drawNs(g, x, y);
+			return "Terror";
 		}
 		else if(a <= 70)//69,70
 		{
-			drawTD(g, x, y);
+			return "tan";	
 		}
 		else if(a <= 72)//71,72
 		{
-			drawBD(g, x, y);
+			return "blue";	
 		}
 		else if(a <= 74)//73,74
 		{
-			drawGD(g, x, y);
+			return "green";
 		}
 		else if(a <= 76)//75,76
 		{
-			drawRD(g, x, y);
+			return "red";
+		}
+		else
+		return null;
+	}
+	public String getType(int a)//TODO Added All of this in order to stay organized
+	{
+		if(a <= 9)// 1,2,3,4,5,6,7,8,9
+		{
+			return "key";
+		}
+		else if(a <= 17)//10,11,12,13,14,15,16,17
+		{
+			return "sun";
+		}
+		else if(a <= 24)//18,19,20,21,22,23,24
+		{
+			return "moon";
+		}
+		else if(a <= 30)//25,26,27,28,29,30
+		{
+			return "key";
+		}
+		else if(a <= 34)//31,32,33,34
+		{
+			return "sun";
+		}
+		else if(a <= 38)//35,36,37,38
+		{
+			return "moon";
+		}
+		else if(a <= 42)//39,40,41,42
+		{
+			return "key";
+		}
+		else if(a <= 46)//43,44,45,46
+		{
+			return "sun";
+		}
+		else if(a <= 49)//47,48,49
+		{
+			return "moon";
+		}
+		else if(a <= 52)//50,51,52
+		{
+			return "key";
+		}
+		else if(a <= 55)//53,54,55
+		{
+			return "sun";
+		}
+		else if(a <= 58)//56,57,58
+		{
+			return "moon";
+		}
+		else if(a <= 68)//59,60,61,62,63,64,65,66,67,68
+		{
+			return "Terror";
+		}
+		else if(a <= 70)//69,70
+		{
+			return "door";
+		}
+		else if(a <= 72)//71,72
+		{
+			return "door";
+		}
+		else if(a <= 74)//73,74
+		{
+			return "door";
+		}
+		else if(a <= 76)//75,76
+		{
+			return "door";
+		}
+		else
+		return null;
+	}
+	public void putDownCards(int a, Graphics g, int x, int y)
+	{
+		if(getColor(a) == "tan")
+		{
+			if(getType(a) == "key")
+			{
+				drawTk(g, x, y);
+			}
+			if(getType(a) == "sun")
+			{
+				drawTs(g, x, y);
+			}
+			if(getType(a) == "moon")
+			{
+				drawTm(g, x, y);
+			}
+			if(getType(a) == "door")
+			{
+				drawTD(g, x, y);
+			}
+		}
+		if(getColor(a) == "blue")
+		{
+			if(getType(a) == "key")
+			{
+				drawBk(g, x, y);
+			}
+			if(getType(a) == "sun")
+			{
+				drawBs(g, x, y);
+			}
+			if(getType(a) == "moon")
+			{
+				drawBm(g, x, y);
+			}
+			if(getType(a) == "door")
+			{
+				drawBD(g, x, y);
+			}
+		}
+		if(getColor(a) == "green")
+		{
+			if(getType(a) == "key")
+			{
+				drawGk(g, x, y);
+			}
+			if(getType(a) == "sun")
+			{
+				drawGs(g, x, y);
+			}
+			if(getType(a) == "moon")
+			{
+				drawGm(g, x, y);
+			}
+			if(getType(a) == "door")
+			{
+				drawGD(g, x, y);
+			}
+		}
+		if(getColor(a) == "red")
+		{
+			if(getType(a) == "key")
+			{
+				drawRk(g, x, y);
+			}
+			if(getType(a) == "sun")
+			{
+				drawRs(g, x, y);
+			}
+			if(getType(a) == "moon")
+			{
+				drawRm(g, x, y);
+			}
+			if(getType(a) == "door")
+			{
+				drawRD(g, x, y);
+			}
+		}
+		if(getColor(a) == "Terror")
+		{
+			drawNs(g, x, y); 
 		}
 	}
 
@@ -654,7 +811,6 @@ public class Card extends JFrame
 			drawBoard(g);
 		}
 	}
-
 	private class Mousey implements MouseListener, MouseMotionListener
 	{
 		public void prophit()
@@ -921,7 +1077,7 @@ public class Card extends JFrame
 		}
 		public void NightmaresAndKeys()
 		{
-			if(Nightmare == true || (Hand.get(HandCard) > 58 && Hand.get(HandCard) <= 68))
+			if(Nightmare == true)
 				if((Hand.get(HandCard) > 0 && Hand.get(HandCard) <= 9) || (Hand.get(HandCard) > 24 && Hand.get(HandCard) <= 30) || (Hand.get(HandCard) > 38 && Hand.get(HandCard) <= 42) || (Hand.get(HandCard) > 49 && Hand.get(HandCard) <= 52))
 				{
 					System.out.println("Checkpoint 3");
@@ -990,15 +1146,6 @@ public class Card extends JFrame
 		{
 			if(Hand.size() > 4)
 				Deck.add(randy.nextInt(Deck.size() - 1), Hand.remove(4));
-			if(Prophacy.size() > 0)
-			{
-				int P = 0;
-				P = Prophacy.size();
-				while(Prophacy.size() != 0)
-					Deck.add(randy.nextInt(Deck.size() - 1), Prophacy.remove(0));
-				for(int i = 0; i < P; i++)
-					Prophacy.add(Deck.remove(0));
-			}
 			DoorsOrNO = false;
 			TanDoor = false;
 			GreenDoor = false;
@@ -1081,25 +1228,14 @@ public class Card extends JFrame
 		@Override
 		public void mousePressed(MouseEvent e) 
 		{
-			System.out.println("mousePressed");
-			if(e.getX() >= CBX && e.getX() <= CBX+cardWidth && e.getY() >= deckY && e.getY() <= deckY+cardHeight)
-			{
-				if(TanDoor == true || BlueDoor == true|| RedDoor == true|| GreenDoor == true)
-					Unused();
-				if(Nightmare == true)
-				{
-					while(Hand.size() != 0)
-					{
-						Discard.add(Hand.remove(0));
-					}
-					firstDraw = true;
-					Nightmare = false;
-				}
-				DrawCard();
-			}
-
 			if(Nightmare == false)
 			{
+			System.out.println("mousePressed");
+			if(e.getX() >= CBX && e.getX() <= CBX+cardWidth && e.getY() >= CBY && e.getY() <= CBY+cardHeight)
+			{
+				Unused();
+				DrawCard();
+			}
 			if(e.getX() >= firstX && e.getX() <= firstX+cardWidth && e.getY() >= firstY && e.getY() <= firstY+cardHeight)
 			{
 				mP();
@@ -1279,97 +1415,51 @@ public class Card extends JFrame
 					if(Doors.get(i) == 76)
 						red++;
 				}
-				int markOne = 0;
-				int markTwo = 0;
 				if(tC == sC && sC == thC)
 				{
 					if(tC == "Tan" && tan < 2)
 					{
-						for(int i = 0; i < Deck.size(); i++)
-						{
-							if(Deck.get(i).equals(69))
-							{
-								markOne = i;
-							}
-							if(Deck.get(i).equals(70))
-							{
-								markTwo = i;
-							}
-						}
-						if(Deck.contains(69) == true)
-							Doors.add(Deck.remove(markOne));
-						else if(Deck.contains(70) == true)
-							Doors.add(Deck.remove(markTwo));
-						else if(Prophacy.contains(69) == true)
-							Doors.add(Prophacy.remove(markOne));
-						else if(Prophacy.contains(70) == true)
-							Doors.add(Prophacy.remove(markTwo));
+						if(Deck.contains(69))
+							Doors.add(Deck.remove(69));
+						else if(Deck.contains(70))
+							Doors.add(Deck.remove(70));
+						else if(Prophacy.contains(69))
+							Doors.add(Prophacy.remove(69));
+						else if(Prophacy.contains(70))
+							Doors.add(Prophacy.remove(70));
 					}
 					else if(tC == "Blue" && blue < 2)
 					{
-						for(int i = 0; i < Deck.size(); i++)
-						{
-							if(Deck.get(i).equals(71))
-							{
-								markOne = i;
-							}
-							if(Deck.get(i).equals(72))
-							{
-								markTwo = i;
-							}
-						}
-						if(Deck.contains(71) == true)
-							Doors.add(Deck.remove(markOne));
-						else if(Deck.contains(72) == true)
-							Doors.add(Deck.remove(markTwo));
-						else if(Prophacy.contains(71) == true)
-							Doors.add(Prophacy.remove(markOne));
-						else if(Prophacy.contains(72) == true)
-							Doors.add(Prophacy.remove(markTwo));
+						if(Deck.contains(71))
+							Doors.add(Deck.remove(71));
+						else if(Deck.contains(72))
+							Doors.add(Deck.remove(72));
+						else if(Prophacy.contains(71))
+							Doors.add(Prophacy.remove(71));
+						else if(Prophacy.contains(72))
+							Doors.add(Prophacy.remove(72));
 					}
 					else if(tC == "Green" && green < 2)
 					{
-						for(int i = 0; i < Deck.size(); i++)
-						{
-							if(Deck.get(i).equals(73))
-							{
-								markOne = i;
-							}
-							if(Deck.get(i).equals(74))
-							{
-								markTwo = i;
-							}
-						}
-						if(Deck.contains(73) == true)
-							Doors.add(Deck.remove(markOne));
-						else if(Deck.contains(74) == true)
-							Doors.add(Deck.remove(markTwo));
-						else if(Prophacy.contains(73) == true)
-							Doors.add(Prophacy.remove(markOne));
-						else if(Prophacy.contains(74) == true)
-							Doors.add(Prophacy.remove(markTwo));
+						if(Deck.contains(73))
+							Doors.add(Deck.remove(73));
+						else if(Deck.contains(74))
+							Doors.add(Deck.remove(74));
+						else if(Prophacy.contains(73))
+							Doors.add(Prophacy.remove(73));
+						else if(Prophacy.contains(74))
+							Doors.add(Prophacy.remove(74));
 					}
 					else if(tC == "Red" && red < 2)
 					{
-						for(int i = 0; i < Deck.size(); i++)
-						{
-							if(Deck.get(i).equals(75))
-							{
-								markOne = i;
-							}
-							if(Deck.get(i).equals(76))
-							{
-								markTwo = i;
-							}
-						}
-						if(Deck.contains(75) == true)
-							Doors.add(Deck.remove(markOne));
-						else if(Deck.contains(76) == true)
-							Doors.add(Deck.remove(markTwo));
-						else if(Prophacy.contains(75) == true)
-							Doors.add(Prophacy.remove(markOne));
-						else if(Prophacy.contains(76) == true)
-							Doors.add(Prophacy.remove(markTwo));
+						if(Deck.contains(75))
+							Doors.add(Deck.remove(75));
+						else if(Deck.contains(76))
+							Doors.add(Deck.remove(76));
+						else if(Prophacy.contains(75))
+							Doors.add(Prophacy.remove(75));
+						else if(Prophacy.contains(76))
+							Doors.add(Prophacy.remove(76));
 					}
 					else if(red == 2 && tan == 2 && green == 2 && blue == 2)
 					{
@@ -1419,8 +1509,8 @@ public class Card extends JFrame
 		public void isCardDiscard(int x, int y)
 		{
 			if(x < cardWidth && y < deckY && Hand.get(HandCard) < 68) //TODO
-			{//TODO
-				if((Hand.get(HandCard) <= 9) || (Hand.get(HandCard) > 24 && Hand.get(HandCard) <= 30) || (Hand.get(HandCard) > 38 && Hand.get(HandCard) <= 42) || (Hand.get(HandCard) > 49 && Hand.get(HandCard) <= 52))
+			{
+				if((Hand.get(HandCard) > 0 && Hand.get(HandCard) <= 9) || (Hand.get(HandCard) > 24 && Hand.get(HandCard) <= 30) || (Hand.get(HandCard) > 38 && Hand.get(HandCard) <= 42) || (Hand.get(HandCard) > 49 && Hand.get(HandCard) <= 52))
 				{
 					System.out.println("isCardDiscard showed that a key was discarded");
 					prophit();
@@ -1440,63 +1530,58 @@ public class Card extends JFrame
 		{	
 			if(cardFourSelected == true)
 			{
-				int a  = 4;
-				if(fifthX < firstX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
-				{Hand.add(0, Hand.remove(a));}
-				else if(fifthX < secondX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
-				{Hand.add(1, Hand.remove(a));}
-				else if(fifthX < thirdX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
-				{Hand.add(2, Hand.remove(a));}
-				else if(fifthX < fourthX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
-				{Hand.add(3, Hand.remove(a));}
+				if(fifthX < firstX + cardWidth/2 && fifthY >= deckY)
+				{Hand.add(0, Hand.remove(4));}
+				else if(fifthX < secondX + cardWidth/2 && fifthY >= deckY)
+				{Hand.add(1, Hand.remove(4));}
+				else if(fifthX < thirdX + cardWidth/2 && fifthY >= deckY)
+				{Hand.add(2, Hand.remove(4));}
+				else if(fifthX < fourthX + cardWidth/2 && fifthY >= deckY)
+				{Hand.add(3, Hand.remove(4));}
 			}
 			if(cardThreeSelected == true)
 			{	
-				int a = 3;
-				if(fourthX < firstX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
-				{Hand.add(0, Hand.remove(a));}
-				else if(fourthX < secondX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
-				{Hand.add(1, Hand.remove(a));}		
-				else if(fourthX < thirdX + cardWidth/2 && fifthY >= deckY && Hand.size() > a)
-				{Hand.add(2, Hand.remove(a));}
-				else if(fourthX > fifthX - cardWidth/2 && fifthY >= deckY && Hand.size() > a)
-				{Hand.add(4, Hand.remove(a));}
+				if(fourthX < firstX + cardWidth/2 && fifthY >= deckY)
+				{Hand.add(0, Hand.remove(3));}
+				else if(fourthX < secondX + cardWidth/2 && fifthY >= deckY)
+				{Hand.add(1, Hand.remove(3));}		
+				else if(fourthX < thirdX + cardWidth/2 && fifthY >= deckY)
+				{Hand.add(2, Hand.remove(3));}
+				else if(fourthX > fifthX - cardWidth/2 && fifthY >= deckY)
+				{Hand.add(4, Hand.remove(3));}
 			}
 			if(cardTwoSelected == true)
 			{
-				int a = 2;
-				if(thirdX < firstX + cardWidth/2 && thirdY >= deckY && Hand.size() > a)
-				{Hand.add(0, Hand.remove(a));}
-				else if(thirdX < secondX + cardWidth/2 && thirdY >= deckY && Hand.size() > a)
-				{Hand.add(1, Hand.remove(a));}
-				else if(thirdX > fifthX - cardWidth/2 && thirdY >= deckY && Hand.size() > a)
-				{Hand.add(4, Hand.remove(a));}
-				else if(thirdX > fourthX - cardWidth/2 && thirdY >= deckY && Hand.size() > a)
-				{Hand.add(3, Hand.remove(a));}
+				if(thirdX < firstX + cardWidth/2 && thirdY >= deckY)
+				{Hand.add(0, Hand.remove(2));}
+				else if(thirdX < secondX + cardWidth/2 && thirdY >= deckY)
+				{Hand.add(1, Hand.remove(2));}
+				else if(thirdX > fifthX - cardWidth/2 && thirdY >= deckY)
+				{Hand.add(4, Hand.remove(2));}
+				else if(thirdX > fourthX - cardWidth/2 && thirdY >= deckY)
+				{Hand.add(3, Hand.remove(2));}
 			}
 			if(cardOneSelected == true)
 			{
-				int a = 1;
-				if(secondX < firstX + cardWidth/2 && secondY >= deckY && Hand.size() > a)
-				{Hand.add(0, Hand.remove(a));}
-				else if(secondX > fifthX - cardWidth/2 && secondY >= deckY && Hand.size() > a)
-				{Hand.add(4, Hand.remove(a));}
-				else if(secondX > fourthX - cardWidth/2 && secondY >= deckY && Hand.size() > a)
-				{Hand.add(3, Hand.remove(a));}
-				else if(secondX > thirdX - cardWidth/2 && secondY >= deckY && Hand.size() > a)
-				{Hand.add(2, Hand.remove(a));}
+				if(secondX < firstX + cardWidth/2 && secondY >= deckY)
+				{Hand.add(0, Hand.remove(1));}
+				else if(secondX > fifthX - cardWidth/2 && secondY >= deckY)
+				{Hand.add(4, Hand.remove(1));}
+				else if(secondX > fourthX - cardWidth/2 && secondY >= deckY)
+				{Hand.add(3, Hand.remove(1));}
+				else if(secondX > thirdX - cardWidth/2 && secondY >= deckY)
+				{Hand.add(2, Hand.remove(1));}
 			}
 			if(cardSelected == true)
 			{
-				int a = 0;
-				if(firstX > fifthX - cardWidth/2 && firstY >= deckY && Hand.size() > a)
-				{Hand.add(4, Hand.remove(a));}
-				else if(firstX > fourthX - cardWidth/2 && firstY >= deckY && Hand.size() > a)
-				{Hand.add(3, Hand.remove(a));}
-				else if(firstX > thirdX - cardWidth/2 && firstY >= deckY && Hand.size() > a)
-				{Hand.add(2, Hand.remove(a));}
-				else if(firstX > secondX - cardWidth/2 && firstY >= deckY && Hand.size() > a)
-				{Hand.add(1, Hand.remove(a));}
+				if(firstX > fifthX - cardWidth/2 && firstY >= deckY)
+				{Hand.add(4, Hand.remove(0));}
+				else if(firstX > fourthX - cardWidth/2 && firstY >= deckY)
+				{Hand.add(3, Hand.remove(0));}
+				else if(firstX > thirdX - cardWidth/2 && firstY >= deckY)
+				{Hand.add(2, Hand.remove(0));}
+				else if(firstX > secondX - cardWidth/2 && firstY >= deckY)
+				{Hand.add(1, Hand.remove(0));}
 			}
 		}
 		public void ProphitsWords()
@@ -1574,29 +1659,32 @@ public class Card extends JFrame
 		public void mouseReleased(MouseEvent e) 
 		{
 			System.out.println("mouseReleased");
-			HandCard = 0;
-			whereIsTheCard(firstX, firstY);
-			HandCard = 1;
-			whereIsTheCard(secondX, secondY);
-			HandCard = 2;
-			whereIsTheCard(thirdX, thirdY);
-			HandCard = 3;
-			whereIsTheCard(fourthX, fourthY);
-			HandCard = 4;
-			whereIsTheCard(fifthX, fifthY);
-			
 				Moved();
+			HandCard = 0;
+			
+			whereIsTheCard(firstX, firstY);
 			firstX = cardSpace*1;
 			firstY = deckY;	
+			
+			HandCard = 1;
+			whereIsTheCard(secondX, secondY);
 			secondX = cardSpace*2;
 			secondY = deckY;
+			
+			HandCard = 2;
+			whereIsTheCard(thirdX, thirdY);
 			thirdX = cardSpace*3;
 			thirdY = deckY;	
+			
+			HandCard = 3;
+			whereIsTheCard(fourthX, fourthY);
 			fourthX = cardSpace*4;
 			fourthY = deckY;	
+			
+			HandCard = 4;
+			whereIsTheCard(fifthX, fifthY);
 			fifthX = cardSpace*5;
 			fifthY = deckY;	
-			
 			if(Prophacy.size() > 0)
 			{
 				ProphitsWords();
