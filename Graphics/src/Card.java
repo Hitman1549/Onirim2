@@ -29,6 +29,10 @@ public class Card extends JFrame
 	public static ArrayList<Integer> Inception = new ArrayList<Integer>();
 	public static ArrayList<Integer> Prophacy = new ArrayList<Integer>();
 	
+	private boolean gameOver = false;
+	private boolean lose = false;
+	private boolean win = false;
+	
 	public static boolean repeat = false;
 	public boolean card, cardO, cardT, cardTh, cardF;
 	private boolean cardSelected = false;
@@ -124,6 +128,8 @@ public class Card extends JFrame
 	public int fourthY = deckY;
 	public int fifthY = deckY;
 	public int bottomLineYcoord = boardHeight - (cardHeight + 50);
+	
+	public boolean prophacy = false; //Added this to make it clear when a prophecy was happening
 	public boolean Ip = false;
 	public boolean IIp = false;
 	public boolean IIIp = false;
@@ -145,6 +151,7 @@ public class Card extends JFrame
 	
 	public Card()
 	{
+		
 		if(TanDoor == true || BlueDoor == true || RedDoor == true || GreenDoor == true)
 		{
 			DoorsOrNO = true;
@@ -402,73 +409,41 @@ public class Card extends JFrame
 	}
 	public void DrawCard()
 	{
-		if(Hand.size() > 3)
-			if(Hand.get(3) > 68 && Hand.get(3) <= 76)
-			{
-				Deck.add(randy.nextInt(Deck.size()), Hand.remove(3));
-			}
-		if(Prophacy.size() > 0 && Prophacy.size() < 5 && Hand.size() < 5)
+		if(gameOver == false) //Added this
 		{
-			Hand.add(Prophacy.remove(0));
-			if(58 < Hand.get(Hand.size() - 1) && Hand.get(Hand.size() - 1) <= 68)
+			int temp = Deck.get(0);
+			if(Deck.size() == 0)//Added this
 			{
-				Nightmare = true;
-				System.out.println("Nightmare is in play");
+				gameOver = true;
+				lose = true;
 			}
-		}
-		else
-		if(Hand.size() < 5 && Prophacy.size() == 0)
-		{
-			
-			if(firstDraw == true)
-				if(Deck.get(0) > 58)
+			if(firstDraw)
+			{
+				if(getType(temp).equals("Terror") || getType(temp).equals("door"))
 				{
-					Limbo.add(Limbo.size(), Deck.remove(0));
-					System.out.println("The Limbo is "+Limbo.size() + " Cards Big");
+					Limbo.add(Deck.remove(0));
 				}
 				else
-					Hand.add(Hand.size(), Deck.remove(0));
-				
-				if(firstDraw == true && Hand.size() >= 5)
-				{	
-					while(Limbo.size() != 0)
-					{
-						Deck.add(randy.nextInt(Deck.size()), Limbo.remove(0));
-						
-					}
-					firstDraw = false;
-				}
-				if(firstDraw == false && Hand.size() < 5)
-				{
-					Hand.add(Hand.size(), Deck.remove(0));				
-
-				}
-
-		}
-		if(Hand.size() > 4)
-		{
-			if(58 < Hand.get(4) && Hand.get(4) < 68)
-			{
-				Nightmare = true;
-				System.out.println("Nightmare is in play");
+					Hand.add(Deck.remove(0));
 			}
-			if(68 < Hand.get(4) && Hand.get(4) <= 70)
+			if(Nightmare == true)
 			{
-				TanDoor = true;System.out.println("Tan Door");
+				for(int i = 0; i < 5; i++)
+					Deck.remove(0);
 			}
-			if(70 < Hand.get(4) && Hand.get(4) <= 72)
+			else
+			if(prophacy)
 			{
-				BlueDoor = true;System.out.println("Blue Door");
-			}
-			if(72 < Hand.get(4) && Hand.get(4) <= 74)
-			{
-				GreenDoor = true;System.out.println("Green Door");
-			}
-			if(74 < Hand.get(4) && Hand.get(4) <= 76)
-			{
-				RedDoor = true;System.out.println("Red Door");
+				Hand.add(Limbo.remove(0));
 			}
 		}
+	}
+	public void shuffleDeck()
+	{
+		while(!Deck.isEmpty()) 
+			Limbo.add(Deck.remove(randy.nextInt(Deck.size())));
+		while(!Limbo.isEmpty())
+			Deck.add(Limbo.remove(0));
 	}
 	public String getColor(int a)//TODO Added All of this in order to stay organized
 	{
