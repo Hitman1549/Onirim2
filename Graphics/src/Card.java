@@ -407,36 +407,56 @@ public class Card extends JFrame
 			Deck.add(CardsN.remove(randy.nextInt(CardsN.size())));
 		Card obj = new Card();
 	}
-	public void DrawCard()
+	public void DrawCard() //TODO
 	{
+		int temp = 0;
+		if(Deck.size() == 0)//Added this
+		{
+			gameOver = true;
+			lose = true;
+		}
+		else
+		temp = Deck.get(0);
+		
 		if(gameOver == false) //Added this
 		{
-			int temp = Deck.get(0);
-			if(Deck.size() == 0)//Added this
+			if(firstDraw == false && Hand.size() < 4)
 			{
-				gameOver = true;
-				lose = true;
+				Hand.add(Deck.remove(0));
 			}
+			
 			if(firstDraw)
 			{
-				if(getType(temp).equals("Terror") || getType(temp).equals("door"))
+				if(Hand.size() != 5)//Changed this
 				{
-					Limbo.add(Deck.remove(0));
-				}
-				else
-					Hand.add(Deck.remove(0));
+					if(getType(temp).contains("Loc"))
+					{
+						Hand.add(Deck.remove(0));
+					}
+					else
+						Limbo.add(Deck.remove(0));
+				}	
 			}
 			if(Nightmare == true)
 			{
 				for(int i = 0; i < 5; i++)
 					Deck.remove(0);
+				Discard.add(Inception.remove(0));
+				Nightmare = false;
 			}
+			
 			else
 			if(prophacy)
 			{
 				Hand.add(Limbo.remove(0));
-			}
-		}
+			}		
+
+		}		
+		if(Hand.size() > 4)
+			firstDraw = false;
+		System.out.println("Hand.size() = "+Hand.size()); 
+		System.out.println("firstDraw = " + firstDraw);
+
 	}
 	public void shuffleDeck()
 	{
@@ -520,51 +540,51 @@ public class Card extends JFrame
 	{
 		if(a <= 9)// 1,2,3,4,5,6,7,8,9
 		{
-			return "key";
+			return "Lockey";
 		}
 		else if(a <= 17)//10,11,12,13,14,15,16,17
 		{
-			return "sun";
+			return "Locsun";
 		}
 		else if(a <= 24)//18,19,20,21,22,23,24
 		{
-			return "moon";
+			return "Locmoon";
 		}
 		else if(a <= 30)//25,26,27,28,29,30
 		{
-			return "key";
+			return "Lockey";
 		}
 		else if(a <= 34)//31,32,33,34
 		{
-			return "sun";
+			return "Locsun";
 		}
 		else if(a <= 38)//35,36,37,38
 		{
-			return "moon";
+			return "Locmoon";
 		}
 		else if(a <= 42)//39,40,41,42
 		{
-			return "key";
+			return "Lockey";
 		}
 		else if(a <= 46)//43,44,45,46
 		{
-			return "sun";
+			return "Locsun";
 		}
 		else if(a <= 49)//47,48,49
 		{
-			return "moon";
+			return "Locmoon";
 		}
 		else if(a <= 52)//50,51,52
 		{
-			return "key";
+			return "Lockey";
 		}
 		else if(a <= 55)//53,54,55
 		{
-			return "sun";
+			return "Locsun";
 		}
 		else if(a <= 58)//56,57,58
 		{
-			return "moon";
+			return "Locmoon";
 		}
 		else if(a <= 68)//59,60,61,62,63,64,65,66,67,68
 		{
@@ -591,78 +611,78 @@ public class Card extends JFrame
 	}
 	public void putDownCards(int a, Graphics g, int x, int y)
 	{
-		if(getColor(a) == "tan")
+		if(getColor(a).contains("tan"))
 		{
-			if(getType(a) == "key")
+			if(getType(a).contains("key"))
 			{
 				drawTk(g, x, y);
 			}
-			if(getType(a) == "sun")
+			if(getType(a).contains("sun"))
 			{
 				drawTs(g, x, y);
 			}
-			if(getType(a) == "moon")
+			if(getType(a).contains("moon"))
 			{
 				drawTm(g, x, y);
 			}
-			if(getType(a) == "door")
+			if(getType(a).contains("door"))
 			{
 				drawTD(g, x, y);
 			}
 		}
-		if(getColor(a) == "blue")
+		if(getColor(a).contains("blue"))
 		{
-			if(getType(a) == "key")
+			if(getType(a).contains("key"))
 			{
 				drawBk(g, x, y);
 			}
-			if(getType(a) == "sun")
+			if(getType(a).contains("sun"))
 			{
 				drawBs(g, x, y);
 			}
-			if(getType(a) == "moon")
+			if(getType(a).contains("moon"))
 			{
 				drawBm(g, x, y);
 			}
-			if(getType(a) == "door")
+			if(getType(a).contains("door"))
 			{
 				drawBD(g, x, y);
 			}
 		}
-		if(getColor(a) == "green")
+		if(getColor(a).contains("green"))
 		{
-			if(getType(a) == "key")
+			if(getType(a).contains("key"))
 			{
 				drawGk(g, x, y);
 			}
-			if(getType(a) == "sun")
+			if(getType(a).contains("sun"))
 			{
 				drawGs(g, x, y);
 			}
-			if(getType(a) == "moon")
+			if(getType(a).contains("moon"))
 			{
 				drawGm(g, x, y);
 			}
-			if(getType(a) == "door")
+			if(getType(a).contains("door"))
 			{
 				drawGD(g, x, y);
 			}
 		}
-		if(getColor(a) == "red")
+		if(getColor(a).contains("red"))
 		{
-			if(getType(a) == "key")
+			if(getType(a).contains("key"))
 			{
 				drawRk(g, x, y);
 			}
-			if(getType(a) == "sun")
+			if(getType(a).contains("sun"))
 			{
 				drawRs(g, x, y);
 			}
-			if(getType(a) == "moon")
+			if(getType(a).contains("moon"))
 			{
 				drawRm(g, x, y);
 			}
-			if(getType(a) == "door")
+			if(getType(a).contains("door"))
 			{
 				drawRD(g, x, y);
 			}
@@ -700,35 +720,35 @@ public class Card extends JFrame
 		} catch (InterruptedException e){
 			e.printStackTrace();
 		}
+			if(Hand.size() > 0)
+			{
+				int first = Hand.get(0);
+				putDownCards(first, g, firstX, firstY);
+			}
+			if(Hand.size() > 1)
+			{
+				int second = Hand.get(1);
+				putDownCards(second, g, secondX, secondY);
+			}
+			if(Hand.size() > 2)
+			{
+				int third = Hand.get(2);
+				putDownCards(third, g, thirdX, thirdY);
+			}
+			if(Hand.size() > 3)
+			{
+				int fourth = Hand.get(3);
+				putDownCards(fourth, g, fourthX, fourthY);
+			}
+			if(Hand.size() > 4)
+			{
+				int fifth = Hand.get(4);
+				putDownCards(fifth, g, fifthX, fifthY);
+			}
 		
-		if(Hand.size() > 0)
-		{
-			int first = Hand.get(0);
-			putDownCards(first, g, firstX, firstY);
-		}
-		if(Hand.size() > 1)
-		{
-			int second = Hand.get(1);
-			putDownCards(second, g, secondX, secondY);
-		}
-		if(Hand.size() > 2)
-		{
-			int third = Hand.get(2);
-			putDownCards(third, g, thirdX, thirdY);
-		}
-		if(Hand.size() > 3)
-		{
-			int fourth = Hand.get(3);
-			putDownCards(fourth, g, fourthX, fourthY);
-		}
-		if(Hand.size() > 4)
-		{
-			int fifth = Hand.get(4);
-			putDownCards(fifth, g, fifthX, fifthY);
-		}
 		for(stackCounter = 0; stackCounter < Stack.size(); stackCounter++)
 		{
-			putDownCards(Stack.get(stackCounter), g, (cardWidth*2)+(15*stackCounter), stackPoint);
+			putDownCards(Stack.get(stackCounter), g, (cardWidth*2)+(15*Stack.size()), stackPoint);
 		}
 		
 		for(int i = 0; i < Limbo.size(); i++)
@@ -799,7 +819,6 @@ public class Card extends JFrame
 		@Override
 		public void mouseDragged(MouseEvent arg0) 
 		{
-			System.out.println("mouseDragged");
 			if(cardSelected == true)
 			{
 				firstX = arg0.getX() - cardWidth/2;
@@ -1064,7 +1083,6 @@ public class Card extends JFrame
 		@Override
 		public void mouseClicked(MouseEvent e) 
 		{
-			System.out.println("MouseClicked");
 				
 				if(e.getX() >= firstX && e.getX() <= firstX+cardWidth && e.getY() >= firstY && e.getY() <= firstY+cardHeight)
 				{
@@ -1205,7 +1223,6 @@ public class Card extends JFrame
 		{
 			if(Nightmare == false)
 			{
-			System.out.println("mousePressed");
 			if(e.getX() >= CBX && e.getX() <= CBX+cardWidth && e.getY() >= CBY && e.getY() <= CBY+cardHeight)
 			{
 				Unused();
@@ -1305,60 +1322,18 @@ public class Card extends JFrame
 				Vp = false;
 			}
 		}
-		public int SimpleNumber(int a)
-		{
-				 if(a <= 9){return 1;}//Tan
-			else if(a <= 17){return 2;}//Tan
-			else if(a <= 24){return 3;}//Tan
-			else if(a <= 30){return 4;}//Blue
-			else if(a <= 34){return 5;}//Blue
-			else if(a <= 38){return 6;}//Blue
-			else if(a <= 42){return 7;}//Green
-			else if(a <= 46){return 8;}//Green
-			else if(a <= 49){return 9;}//Green
-			else if(a <= 52){return 10;}//Red
-			else if(a <= 55){return 11;}//Red
-			else if(a <= 58){return 12;}//Red
-			else if(a <= 68){return 13;}//
-			else if(a <= 70){return 14;}//
-			else if(a <= 72){return 15;}//
-			else if(a <= 74){return 16;}//
-			else if(a <= 76){return 17;}//
-				return 0;
-		}
-		public String CardColor(int b)
-		{
-			 if(b == 1 || b == 2 || b == 3){return "Tan";}
-		else if(b == 4 || b == 5 || b == 6){return "Blue";}
-		else if(b == 7 || b == 8 || b == 9){return "Green";}
-		else if(b == 10 || b == 11 || b == 12){return "Red";}
-			 return null;
-		}
-		public String CardType(int c)
-		{
-			 if(c == 1 || c == 4 || c == 7 || c == 10){return "Key";}
-		else if(c == 2 || c == 5 || c == 8 || c == 11){return "Sun";}
-		else if(c == 3 || c == 6 || c == 9 || c == 12){return "Moon";}
-			 return null;
-		}
+
 		public void isCardCorrect()
 		{
-				int newCard = 0;	newCard = SimpleNumber(Hand.get(HandCard));
-				int topCard = 0;	topCard = SimpleNumber(Stack.get(Stack.size()-1)); 
-				
-				
-					FA = CardColor(newCard);
-					FB = CardType(newCard);
-				
-					SA = CardColor(topCard);
-					SB = CardType(topCard);
-					 if(FB != SB)
-					 {
-						 doubleStack.add(Hand.get(HandCard));
-						 Stack.add(Hand.remove(HandCard));
-					 }
-				doors();
-				
+//				FA = getColor(Hand.get(HandCard));
+//			
+//				SA = getColor(Stack.get(Stack.size()-1));
+				 if(getType(Hand.get(HandCard)) != getType(Stack.get(Stack.size()-1)))
+				 {
+					 doubleStack.add(Hand.get(HandCard));
+					 Stack.add(Hand.remove(HandCard));
+				 }
+			doors();
 		}
 		public void doors()
 		{
@@ -1375,9 +1350,9 @@ public class Card extends JFrame
 				topCard = doubleStack.get(doubleStack.size() - 1); 
 				secondCard = doubleStack.get(doubleStack.size() - 2);
 				thirdCard = doubleStack.get(doubleStack.size() - 3);
-				tC = CardColor(SimpleNumber(doubleStack.get(doubleStack.size() - 1)));
-				sC = CardColor(SimpleNumber(doubleStack.get(doubleStack.size() - 2)));
-				thC = CardColor(SimpleNumber(doubleStack.get(doubleStack.size() - 3)));
+				tC = getColor(doubleStack.get(doubleStack.size() - 1));
+				sC = getColor(doubleStack.get(doubleStack.size() - 2));
+				thC = getColor(doubleStack.get(doubleStack.size() - 3));
 				int tan = 0;int blue = 0;int green = 0;int red = 0;
 				for(int i = 0; i < Doors.size(); i++)
 				{
@@ -1446,19 +1421,11 @@ public class Card extends JFrame
 		}
 		public void isCardSecond()
 		{
-				int O = 0;
-				int T = 0;
-				// The K number for the card being placed
-				O = SimpleNumber(Hand.get(HandCard));
-				// The K number for the card that is first on the stack
-				T = SimpleNumber(Stack.get(Stack.size()-1));
-				FB = CardType(O);
-				SB = CardType(T);
-					 if(FB != SB)
-					 {
-						 doubleStack.add(Hand.get(HandCard));
-						 Stack.add(Hand.remove(HandCard));
-					 }
+			 if(getType(Hand.get(HandCard)) != getType(Stack.get(Stack.size()-1)))
+			 {
+				 doubleStack.add(Hand.get(HandCard));
+				 Stack.add(Hand.remove(HandCard));
+			 }
 		}
 		public void isCardOnStack(int x, int y)
 		{
@@ -1633,7 +1600,6 @@ public class Card extends JFrame
 		@Override
 		public void mouseReleased(MouseEvent e) 
 		{
-			System.out.println("mouseReleased");
 				Moved();
 			HandCard = 0;
 			
