@@ -442,6 +442,7 @@ public class Card extends JFrame
 				for(int i = 0; i < 5; i++)
 					Deck.remove(0);
 				Discard.add(Inception.remove(0));
+				shuffleDeck();
 				Nightmare = false;
 			}
 			
@@ -1042,7 +1043,7 @@ public class Card extends JFrame
 			
 		}
 
-		public void KeysAndLocks()
+		public void KeysAndLocks()//TODO
 		{
 			if(TanDoor == true && Hand.get(HandCard) > 0 && Hand.get(HandCard) <= 9)
 			{
@@ -1077,6 +1078,7 @@ public class Card extends JFrame
 					System.out.println("Checkpoint 3");
 					Discard.add(Hand.remove(4));
 					Discard.add(Hand.remove(HandCard));
+					shuffleDeck();
 					Nightmare = false;
 				}
 		}
