@@ -420,11 +420,11 @@ public class Card extends JFrame
 		
 		if(gameOver == false) //Added this
 		{
-			if(firstDraw == false && Hand.size() < 4)
+			if(firstDraw == false && Hand.size() != 5)
 			{
 				Hand.add(Deck.remove(0));
 			}
-			
+			else
 			if(firstDraw)
 			{
 				if(Hand.size() != 5)//Changed this
@@ -437,15 +437,22 @@ public class Card extends JFrame
 						Limbo.add(Deck.remove(0));
 				}	
 			}
+			else
 			if(Nightmare == true)
 			{
+				System.out.println("Nightmare = " + Nightmare);
 				for(int i = 0; i < 5; i++)
 					Deck.remove(0);
 				Discard.add(Inception.remove(0));
 				shuffleDeck();
 				Nightmare = false;
 			}
-			
+			else
+			if(getType(temp) == "Nightmare")
+			{
+				Nightmare = true;
+				Limbo.add(Deck.remove(0));
+			}
 			else
 			if(prophacy)
 			{
@@ -457,6 +464,8 @@ public class Card extends JFrame
 			firstDraw = false;
 		System.out.println("Hand.size() = "+Hand.size()); 
 		System.out.println("firstDraw = " + firstDraw);
+		
+		System.out.println("prophacy = " + prophacy);
 
 	}
 	public void shuffleDeck()
