@@ -151,7 +151,11 @@ public class Card extends JFrame
 	
 	public Card()
 	{
-		
+		setUpCards();
+		makeEnvironment();
+	}	
+	public void setUpCards()
+	{
 		if(TanDoor == true || BlueDoor == true || RedDoor == true || GreenDoor == true)
 		{
 			DoorsOrNO = true;
@@ -278,7 +282,6 @@ public class Card extends JFrame
 			catch(Exception e){System.out.println(e + "Damn it GD");
 		}
 	}
-
 	public void drawTk(Graphics g, int X, int Y)
 	{
 		g.drawImage(ImageTK, X, Y, cardWidth, cardHeight, null);
