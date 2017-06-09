@@ -405,7 +405,6 @@ public class Card extends JFrame
 			CardsN.add(new Integer(i));
 		for(int i = 0; i < DeckSize; i++)
 			Deck.add(CardsN.remove(randy.nextInt(CardsN.size())));
-		Card obj = new Card();
 	}
 	public void DrawCard() //TODO
 	{
@@ -415,48 +414,34 @@ public class Card extends JFrame
 			gameOver = true;
 			lose = true;
 		}
-		else
-		temp = Deck.get(0);
+		else if(prophacy)
+			temp = Limbo.remove(0);
+		
+		else if(Deck.size() > 0)
+			temp = Deck.remove(0);
 		
 		if(gameOver == false) //Added this
 		{
-			if(firstDraw == false && Hand.size() != 5)
-			{
-				Hand.add(Deck.remove(0));
-			}
-			else
 			if(firstDraw)
 			{
 				if(Hand.size() != 5)//Changed this
 				{
 					if(getType(temp).contains("Loc"))
 					{
-						Hand.add(Deck.remove(0));
+						Hand.add(temp);
 					}
 					else
-						Limbo.add(Deck.remove(0));
+						Limbo.add(temp);
 				}	
 			}
-			else
+			else 
 			if(Nightmare == true)
 			{
-				System.out.println("Nightmare = " + Nightmare);
 				for(int i = 0; i < 5; i++)
 					Deck.remove(0);
 				Discard.add(Inception.remove(0));
 				shuffleDeck();
 				Nightmare = false;
-			}
-			else
-			if(getType(temp) == "Nightmare")
-			{
-				Nightmare = true;
-				Limbo.add(Deck.remove(0));
-			}
-			else
-			if(prophacy)
-			{
-				Hand.add(Limbo.remove(0));
 			}		
 
 		}		
@@ -464,8 +449,6 @@ public class Card extends JFrame
 			firstDraw = false;
 		System.out.println("Hand.size() = "+Hand.size()); 
 		System.out.println("firstDraw = " + firstDraw);
-		
-		System.out.println("prophacy = " + prophacy);
 
 	}
 	public void shuffleDeck()
@@ -1236,8 +1219,15 @@ public class Card extends JFrame
 			{
 			if(e.getX() >= CBX && e.getX() <= CBX+cardWidth && e.getY() >= CBY && e.getY() <= CBY+cardHeight)
 			{
-				Unused();
-				DrawCard();
+				System.out.print("You attempt to draw a card");
+				if(Hand.size() != 5)
+				{
+					System.out.println("You Succssfuly Draw a Card");
+					Unused();
+					DrawCard();
+				}
+				else
+					System.out.println("You Failed to draw a card");
 			}
 			if(e.getX() >= firstX && e.getX() <= firstX+cardWidth && e.getY() >= firstY && e.getY() <= firstY+cardHeight)
 			{
